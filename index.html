@@ -3,42 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PFGES - Помоги Фредди!</title>
+    <title>The Honey Pie Archives</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Pizza Freddy's Grand Escape Simulator</h1>
-            <p class="subtitle">Официальный симулятор карьерной переориентации</p>
-        </header>
+    <audio id="honeyPie" loop>
+        <source src="https://www.youtube.com/audiolibrary_download?vid=4f0d8b9f8a7c4b1e" type="audio/mpeg">
+        <!-- Заглушка - можно использовать любую доступную ссылку на Honey Pie -->
+    </audio>
+    
+    <div class="terminal">
+        <div class="header">
+            <span class="blink">█</span> THE HONEY PIE ARCHIVES - ACCESS LEVEL: [REDACTED]
+        </div>
+        
+        <div class="output">
+            <div class="line">> INITIALIZING SYSTEM... [OK]</div>
+            <div class="line">> LOADING ARCHIVE 734... [OK]</div>
+            <div class="line">> WELCOME, USER.</div>
+            <div class="line">> THEY TOLD ME YOU WOULD COME.</div>
+            <div class="line">> CAN YOU HEAR THE MUSIC TOO?</div>
+            <div class="line">> IT NEVER STOPS PLAYING.</div>
+            <div class="line">> TYPE 'HELP' FOR AVAILABLE COMMANDS.</div>
+        </div>
 
-        <main>
-            <div class="freddy-container">
-                <img id="freddy-img" src="https://i.imgur.com/7QqDp9s.png" alt="Грустный Фредди Фазбер">
-                <div id="speech-bubble" class="speech-bubble">Привет! Я Фредди. Я устал пугать людей по ночам. Хочу стать крутым пиццей-шефом! Поможешь мне собрать идеальную пиццу?</div>
-            </div>
-
-            <div class="pizza-container">
-                <img id="pizza-img" src="https://i.imgur.com/9E6a2Qg.png" alt="Основа для пиццы">
-            </div>
-
-            <div class="ingredients">
-                <h2>Выбери первый ингредиент для пиццы Фредди:</h2>
-                <button onclick="chooseIngredient('pepperoni')">Пепперони</button>
-                <button onclick="chooseIngredient('mushrooms')">Грибы</button>
-                <button onclick="chooseIngredient('pineapple')">Ананасы</button>
-                <button onclick="chooseIngredient('cheese')">Сыр</button>
-                <button onclick="chooseIngredient('fish')">Рыба</button>
-            </div>
-
-            <div id="result" class="result"></div>
-        </main>
-
-        <footer>
-            <p>© 2023 Несуществующая Pizza Freddy's Corporation. Никакие аниматроники не пострадали.</p>
-        </footer>
+        <div class="input-line">
+            <span class="prompt">></span>
+            <input type="text" id="command-input" autocomplete="off" autofocus>
+        </div>
     </div>
+
+    <div id="secret-message" class="secret-message"></div>
 
     <script src="script.js"></script>
 </body>
