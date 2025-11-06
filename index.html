@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>neyt_tm)!</title>
+    <title>Neyt_tm</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,16 +14,51 @@
         }
 
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            color: #333;
+            color: white;
             position: relative;
             overflow-x: hidden;
+        }
+
+        /* Анимированный градиент */
+        .gradient-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Затемнение для лучшей читаемости */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
         }
 
         .container {
@@ -39,25 +74,38 @@
             width: 100%;
             max-width: 800px;
             height: auto;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border-radius: 0; /* Убрано скругление */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 0;
+            transition: transform 0.3s ease;
         }
 
-        .furina-image {
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Фурина с удаленным фоном */
+        .furina-container {
             position: fixed;
             bottom: 0;
             right: 0;
             width: 300px;
-            height: auto;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            border-radius: 0; /* Убрано скругление */
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .furina-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: bottom right;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
         }
 
         .social-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             margin-top: 30px;
         }
 
@@ -65,44 +113,71 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 0; /* Убрано скругление */
-            background: rgba(255, 255, 255, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 0;
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            color: #333;
-            font-size: 20px;
+            color: white;
+            font-size: 24px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
         }
 
         .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:active {
+            transform: translateY(-4px) scale(1.05);
+            transition: transform 0.1s;
         }
 
         .email-link {
             display: inline-flex;
             align-items: center;
-            margin-top: 20px;
-            color: #333;
+            margin-top: 25px;
+            color: white;
             text-decoration: none;
-            font-size: 16px;
-            padding: 10px 20px;
-            border-radius: 0; /* Убрано скругление */
-            background: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            padding: 12px 25px;
+            border-radius: 0;
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .email-link:hover {
-            background: rgba(255, 255, 255, 0.95);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .social-section {
@@ -112,15 +187,103 @@
         }
 
         .social-title {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #555;
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: white;
             font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .modal-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
-            .furina-image {
+            .furina-container {
                 width: 200px;
+                height: 300px;
+            }
+            
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .furina-container {
+                width: 150px;
+                height: 200px;
             }
             
             .social-link {
@@ -128,69 +291,65 @@
                 height: 45px;
                 font-size: 18px;
             }
-        }
-
-        @media (max-width: 480px) {
-            .furina-image {
-                width: 150px;
-            }
-            
-            .social-link {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
             
             .email-link {
-                font-size: 14px;
-                padding: 8px 16px;
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+
+            .social-title {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Анимированный градиент -->
+    <div class="gradient-background"></div>
+    <div class="overlay"></div>
+
     <div class="container">
         <!-- Основное изображение -->
-       <img src="main.jpg" alt="Main Image" class="main-image">
+        <img src="main.jpg" alt="Main Image" class="main-image">
         
         <!-- Социальные сети -->
         <div class="social-section">
-            <h3 class="social-title">тебе сюда пупс!</h3>
+            <h3 class="social-title">Мои социальные сети</h3>
             <div class="social-links">
-                <a href="https://discord.com/users/neyt_tm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="discord">
                     <i class="fab fa-discord"></i>
                 </a>
-                <a href="https://www.reddit.com/user/neyt_tm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="reddit">
                     <i class="fab fa-reddit"></i>
                 </a>
-                <a href="https://www.tiktok.com/@neyt_tm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="tiktok">
                     <i class="fab fa-tiktok"></i>
                 </a>
-                <a href="https://t.me/neyt_tm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="telegram">
                     <i class="fab fa-telegram"></i>
                 </a>
-                <a href="https://www.instagram.com/neyt_tm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://open.spotify.com/user/neyt_tm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="spotify">
                     <i class="fab fa-spotify"></i>
                 </a>
-                <a href="https://www.twitch.tv/neyt_tm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="twitch">
                     <i class="fab fa-twitch"></i>
                 </a>
-                <a href="https://www.youtube.com/@neyt_tm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="youtube">
                     <i class="fab fa-youtube"></i>
                 </a>
-                <a href="https://xbox.com" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="xbox">
                     <i class="fab fa-xbox"></i>
                 </a>
-                <a href="https://twitter.com/neyt_tm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="twitter">
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="https://steamcommunity.com/id/neyt_tm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="steam">
                     <i class="fab fa-steam"></i>
                 </a>
-                <a href="https://github.com/neyttm" class="social-link" target="_blank">
+                <a href="#" class="social-link" data-modal="github">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
@@ -200,7 +359,104 @@
         </div>
     </div>
 
-    <!-- Фурина в правом нижнем углу -->
-  <img src="furina.jpg" alt="Furina" class="furina-image">
+    <!-- Фурина с удаленным фоном -->
+    <div class="furina-container">
+        <img src="furina.png" alt="Furina" class="furina-image">
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2 class="modal-title" id="modal-title">Discord</h2>
+            <p class="modal-text" id="modal-text">Присоединяйтесь ко мне в Discord: neyt_tm</p>
+            <button class="close-btn" id="close-modal">Закрыть</button>
+        </div>
+    </div>
+
+    <script>
+        // Данные для модальных окон
+        const modalData = {
+            discord: {
+                title: "Discord",
+                text: "Присоединяйтесь ко мне в Discord: neyt_tm"
+            },
+            reddit: {
+                title: "Reddit",
+                text: "Читайте мои посты на Reddit: u/neyt_tm"
+            },
+            tiktok: {
+                title: "TikTok",
+                text: "Смотрите мои видео в TikTok: @neyt_tm"
+            },
+            telegram: {
+                title: "Telegram",
+                text: "Подписывайтесь на мой Telegram: @neyt_tm"
+            },
+            instagram: {
+                title: "Instagram",
+                text: "Следите за моими фото в Instagram: @neyt_tm"
+            },
+            spotify: {
+                title: "Spotify",
+                text: "Слушайте мои плейлисты на Spotify: neyt_tm"
+            },
+            twitch: {
+                title: "Twitch",
+                text: "Смотрите мои стримы на Twitch: neyt_tm"
+            },
+            youtube: {
+                title: "YouTube",
+                text: "Подписывайтесь на мой YouTube: @neyt_tm"
+            },
+            xbox: {
+                title: "Xbox",
+                text: "Играйте со мной в Xbox: neyt_tm"
+            },
+            twitter: {
+                title: "Twitter",
+                text: "Читайте мои твиты: @neyt_tm"
+            },
+            steam: {
+                title: "Steam",
+                text: "Добавляйтесь в друзья в Steam: neyt_tm"
+            },
+            github: {
+                title: "GitHub",
+                text: "Смотрите мои проекты на GitHub: neyttm"
+            }
+        };
+
+        // Элементы модального окна
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalText = document.getElementById('modal-text');
+        const closeBtn = document.getElementById('close-modal');
+
+        // Открытие модального окна
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const platform = link.getAttribute('data-modal');
+                
+                if (modalData[platform]) {
+                    modalTitle.textContent = modalData[platform].title;
+                    modalText.textContent = modalData[platform].text;
+                    modal.classList.add('active');
+                }
+            });
+        });
+
+        // Закрытие модального окна
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Закрытие по клику вне окна
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
