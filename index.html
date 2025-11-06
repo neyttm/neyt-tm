@@ -1,81 +1,423 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>neyt_tm</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎧</text></svg>">
+    <title>Neyt_tm | Музыка</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .player-container {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .blur-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1;
+            border-radius: 24px;
+        }
+
+        .blur-edge {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            z-index: 0;
+            border-radius: 30px;
+        }
+
+        .player {
+            position: relative;
+            z-index: 2;
+            padding: 30px 25px;
+            text-align: center;
+            color: #333;
+        }
+
+        .album-cover {
+            width: 180px;
+            height: 180px;
+            border-radius: 12px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .album-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .song-info {
+            margin-bottom: 25px;
+        }
+
+        .song-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .song-artist {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .progress-area {
+            margin-bottom: 25px;
+        }
+
+        .progress-bar {
+            height: 5px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 10px;
+            position: relative;
+            transition: width 0.1s linear;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            color: #333;
+        }
+
+        .play-pause {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #333;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .email-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .email-link:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .social-section {
+            text-align: center;
+            width: 100%;
+        }
+
+        .social-title {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                gap: 20px;
+            }
+            
+            .player {
+                padding: 25px 20px;
+            }
+            
+            .album-cover {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="background"></div>
-    
-    <main class="container">
-        <!-- Центральное размытое окно с плеером -->
-        <div class="player-window">
-            <div class="album-art">
-                <!-- Можно заменить на свою обложку -->
-                <div class="placeholder-art">Tame Impala - Borderline</div>
-            </div>
-            <div class="track-info">
-                <h1 class="track-title">Borderline</h1>
-                <p class="track-artist">Tame Impala</p>
-            </div>
-            <div class="player-controls">
-                <audio id="audio-player" loop>
-                    <!-- ЗАМЕНИТЕ ССЫЛКУ НА ВАШ ФАЙЛ -->
-                    <source src="tame_impala_borderline.mp3" type="audio/mpeg">
-                    Ваш браузер не поддерживает аудио элемент.
-                </audio>
-                <button id="play-pause-btn" class="control-btn">▶️</button>
-                <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
+    <div class="container">
+        <div class="player-container">
+            <div class="blur-edge"></div>
+            <div class="blur-background"></div>
+            <div class="player">
+                <div class="album-cover">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3e/Tame_Impala_-_Borderline.png/240px-Tame_Impala_-_Borderline.png" alt="Borderline - Tame Impala">
+                </div>
+                <div class="song-info">
+                    <h2 class="song-title">Borderline</h2>
+                    <p class="song-artist">Tame Impala</p>
+                </div>
+                <div class="progress-area">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="timer">
+                        <span class="current">0:00</span>
+                        <span class="duration">4:34</span>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button class="control-btn" id="prev">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="control-btn play-pause" id="play-pause">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="control-btn" id="next">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                </div>
             </div>
         </div>
-    </main>
 
-    <!-- Нижняя панель с иконками соцсетей -->
-    <footer class="social-links">
-        <a href="https://discord.com/users/neyt_tm" target="_blank" title="Discord">
-            <img src="https://cdn.simpleicons.org/discord" alt="Discord">
-        </a>
-        <a href="https://www.reddit.com/user/neyt_tm" target="_blank" title="Reddit">
-            <img src="https://cdn.simpleicons.org/reddit" alt="Reddit">
-        </a>
-        <a href="https://www.tiktok.com/@neyt_tm" target="_blank" title="TikTok">
-            <img src="https://cdn.simpleicons.org/tiktok" alt="TikTok">
-        </a>
-        <a href="https://t.me/neyt_tm" target="_blank" title="Telegram">
-            <img src="https://cdn.simpleicons.org/telegram" alt="Telegram">
-        </a>
-        <a href="https://www.instagram.com/neyt_tm" target="_blank" title="Instagram">
-            <img src="https://cdn.simpleicons.org/instagram" alt="Instagram">
-        </a>
-        <a href="https://open.spotify.com/user/neyt_tm" target="_blank" title="Spotify">
-            <img src="https://cdn.simpleicons.org/spotify" alt="Spotify">
-        </a>
-        <a href="https://twitch.tv/neyt_tm" target="_blank" title="Twitch">
-            <img src="https://cdn.simpleicons.org/twitch" alt="Twitch">
-        </a>
-        <a href="https://youtube.com/@neyt_tm" target="_blank" title="YouTube">
-            <img src="https://cdn.simpleicons.org/youtube" alt="YouTube">
-        </a>
-        <a href="https://xbox.com" target="_blank" title="XBox">
-            <img src="https://cdn.simpleicons.org/xbox" alt="XBox">
-        </a>
-        <a href="https://twitter.com/neyt_tm" target="_blank" title="X (Twitter)">
-            <img src="https://cdn.simpleicons.org/x" alt="X (Twitter)">
-        </a>
-        <a href="https://steamcommunity.com/id/neyt_tm" target="_blank" title="Steam">
-            <img src="https://cdn.simpleicons.org/steam" alt="Steam">
-        </a>
-        <a href="https://github.com/neyttm" target="_blank" title="GitHub">
-            <img src="https://cdn.simpleicons.org/github" alt="GitHub">
-        </a>
-        <a href="mailto:Imamov0605@gmail.com" title="Gmail">
-            <img src="https://cdn.simpleicons.org/gmail" alt="Gmail">
-        </a>
-    </footer>
+        <div class="social-section">
+            <h3 class="social-title">Мои социальные сети</h3>
+            <div class="social-links">
+                <a href="https://discord.com/users/neyt_tm" class="social-link" target="_blank">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://www.reddit.com/user/neyt_tm" class="social-link" target="_blank">
+                    <i class="fab fa-reddit"></i>
+                </a>
+                <a href="https://www.tiktok.com/@neyt_tm" class="social-link" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://t.me/neyt_tm" class="social-link" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://www.instagram.com/neyt_tm" class="social-link" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://open.spotify.com/user/neyt_tm" class="social-link" target="_blank">
+                    <i class="fab fa-spotify"></i>
+                </a>
+                <a href="https://www.twitch.tv/neyt_tm" class="social-link" target="_blank">
+                    <i class="fab fa-twitch"></i>
+                </a>
+                <a href="https://www.youtube.com/@neyt_tm" class="social-link" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://xbox.com" class="social-link" target="_blank">
+                    <i class="fab fa-xbox"></i>
+                </a>
+                <a href="https://twitter.com/neyt_tm" class="social-link" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://steamcommunity.com/id/neyt_tm" class="social-link" target="_blank">
+                    <i class="fab fa-steam"></i>
+                </a>
+                <a href="https://github.com/neyttm" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <a href="mailto:Imamov0605@gmail.com" class="email-link">
+                <i class="fas fa-envelope" style="margin-right: 8px;"></i> Imamov0605@gmail.com
+            </a>
+        </div>
+    </div>
 
-    <script src="script.js"></script>
+    <audio id="audio" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"></audio>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const playPauseBtn = document.getElementById('play-pause');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+        const progressBar = document.querySelector('.progress');
+        const currentTimeEl = document.querySelector('.current');
+        const durationEl = document.querySelector('.duration');
+        
+        let isPlaying = false;
+        
+        // Для демонстрации используем короткий аудиофайл
+        // В реальном использовании замените на свою музыку
+        audio.src = "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav";
+        
+        function togglePlayPause() {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                audio.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        }
+        
+        function updateProgress() {
+            const { duration, currentTime } = audio;
+            const progressPercent = (currentTime / duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            
+            // Форматирование времени
+            const formatTime = (time) => {
+                const minutes = Math.floor(time / 60);
+                const seconds = Math.floor(time % 60);
+                return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            };
+            
+            currentTimeEl.textContent = formatTime(currentTime);
+            if (duration) {
+                durationEl.textContent = formatTime(duration);
+            }
+        }
+        
+        function setProgress(e) {
+            const width = this.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            
+            audio.currentTime = (clickX / width) * duration;
+        }
+        
+        // События
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('ended', () => {
+            isPlaying = false;
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            progressBar.style.width = '0%';
+            currentTimeEl.textContent = '0:00';
+        });
+        
+        // Для демонстрации кнопки prev/next не функциональны
+        prevBtn.addEventListener('click', () => {
+            alert('В демо-версии доступен только один трек');
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            alert('В демо-версии доступен только один трек');
+        });
+        
+        // Клик по прогресс-бару
+        document.querySelector('.progress-bar').addEventListener('click', setProgress);
+        
+        // Установка длительности при загрузке метаданных
+        audio.addEventListener('loadedmetadata', () => {
+            const duration = audio.duration;
+            const minutes = Math.floor(duration / 60);
+            const seconds = Math.floor(duration % 60);
+            durationEl.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        });
+    </script>
 </body>
 </html>
