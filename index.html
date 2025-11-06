@@ -25,16 +25,16 @@
             overflow-x: hidden;
         }
 
-        /* Анимированный градиент */
+        /* Анимированный градиент с улучшенными цветами */
         .gradient-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
             background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+            animation: gradient 18s ease infinite;
             z-index: -2;
         }
 
@@ -50,14 +50,16 @@
             }
         }
 
-        /* Затемнение для лучшей читаемости */
+        /* Улучшенное затемнение */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             z-index: -1;
         }
 
@@ -74,13 +76,15 @@
             width: 100%;
             max-width: 800px;
             height: auto;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-radius: 0;
-            transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .main-image:hover {
-            transform: scale(1.02);
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.5);
         }
 
         /* Фурина с удаленным фоном */
@@ -91,6 +95,7 @@
             width: 300px;
             height: 400px;
             overflow: hidden;
+            z-index: 10;
         }
 
         .furina-image {
@@ -98,7 +103,12 @@
             height: 100%;
             object-fit: contain;
             object-position: bottom right;
-            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.6));
+            transition: transform 0.3s ease;
+        }
+
+        .furina-image:hover {
+            transform: scale(1.05);
         }
 
         .social-links {
@@ -109,22 +119,25 @@
             margin-top: 30px;
         }
 
+        /* Скругленные иконки с улучшенной анимацией */
         .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            border-radius: 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            width: 65px;
+            height: 65px;
+            border-radius: 16px; /* Скругленные углы */
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             color: white;
-            font-size: 24px;
+            font-size: 26px;
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             position: relative;
             overflow: hidden;
         }
@@ -136,15 +149,17 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.7s;
         }
 
         .social-link:hover {
-            transform: translateY(-8px) scale(1.1);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-10px) scale(1.12);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .social-link:hover::before {
@@ -152,9 +167,23 @@
         }
 
         .social-link:active {
-            transform: translateY(-4px) scale(1.05);
+            transform: translateY(-5px) scale(1.08);
             transition: transform 0.1s;
         }
+
+        /* Индивидуальные цвета для иконок при наведении */
+        .social-link:nth-child(1):hover { background: rgba(88, 101, 242, 0.3); } /* Discord */
+        .social-link:nth-child(2):hover { background: rgba(255, 69, 0, 0.3); } /* Reddit */
+        .social-link:nth-child(3):hover { background: rgba(0, 0, 0, 0.3); } /* TikTok */
+        .social-link:nth-child(4):hover { background: rgba(0, 136, 204, 0.3); } /* Telegram */
+        .social-link:nth-child(5):hover { background: rgba(225, 48, 108, 0.3); } /* Instagram */
+        .social-link:nth-child(6):hover { background: rgba(30, 215, 96, 0.3); } /* Spotify */
+        .social-link:nth-child(7):hover { background: rgba(100, 65, 165, 0.3); } /* Twitch */
+        .social-link:nth-child(8):hover { background: rgba(255, 0, 0, 0.3); } /* YouTube */
+        .social-link:nth-child(9):hover { background: rgba(16, 124, 16, 0.3); } /* Xbox */
+        .social-link:nth-child(10):hover { background: rgba(29, 161, 242, 0.3); } /* Twitter */
+        .social-link:nth-child(11):hover { background: rgba(27, 40, 56, 0.3); } /* Steam */
+        .social-link:nth-child(12):hover { background: rgba(36, 41, 46, 0.3); } /* GitHub */
 
         .email-link {
             display: inline-flex;
@@ -163,21 +192,21 @@
             color: white;
             text-decoration: none;
             font-size: 18px;
-            padding: 12px 25px;
-            border-radius: 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            padding: 14px 28px;
+            border-radius: 12px; /* Скругленные углы */
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             transition: all 0.4s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .email-link:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .social-section {
@@ -187,14 +216,20 @@
         }
 
         .social-title {
-            font-size: 24px;
-            margin-bottom: 25px;
+            font-size: 28px;
+            margin-bottom: 30px;
             color: white;
-            font-weight: 500;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* Модальное окно */
+        /* Улучшенное модальное окно с лучшим размытием */
         .modal {
             display: none;
             position: fixed;
@@ -202,14 +237,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(25px) brightness(0.8);
+            -webkit-backdrop-filter: blur(25px) brightness(0.8);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s ease;
         }
 
         .modal.active {
@@ -218,49 +253,57 @@
         }
 
         .modal-content {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            padding: 50px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             max-width: 500px;
             width: 90%;
             text-align: center;
-            transform: scale(0.8);
-            transition: transform 0.4s ease;
+            border-radius: 20px;
+            transform: scale(0.8) translateY(20px);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .modal.active .modal-content {
-            transform: scale(1);
+            transform: scale(1) translateY(0);
         }
 
         .modal-title {
-            font-size: 28px;
+            font-size: 32px;
             margin-bottom: 20px;
             color: white;
+            font-weight: 600;
         }
 
         .modal-text {
             font-size: 18px;
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             color: rgba(255, 255, 255, 0.9);
         }
 
         .close-btn {
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             color: white;
-            padding: 12px 30px;
+            padding: 14px 35px;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .close-btn:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -270,13 +313,20 @@
             }
             
             .social-link {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 22px;
+                border-radius: 14px;
             }
 
             .modal-content {
                 padding: 30px 20px;
+                border-radius: 16px;
+            }
+
+            .social-title {
+                font-size: 24px;
+                padding: 12px 25px;
             }
         }
 
@@ -287,14 +337,15 @@
             }
             
             .social-link {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                border-radius: 12px;
             }
             
             .email-link {
                 font-size: 16px;
-                padding: 10px 20px;
+                padding: 12px 24px;
             }
 
             .social-title {
@@ -304,7 +355,7 @@
     </style>
 </head>
 <body>
-    <!-- Анимированный градиент -->
+    <!-- Анимированный градиент с улучшенными цветами -->
     <div class="gradient-background"></div>
     <div class="overlay"></div>
 
@@ -406,7 +457,7 @@
             },
             youtube: {
                 title: "YouTube",
-                text: "Подписывайтесь на мой YouTube: @neyt_tm"
+                text: "Подписывайтесь на мой YouTube только там ничего нету!: @neyt_tm"
             },
             xbox: {
                 title: "Xbox",
@@ -414,7 +465,7 @@
             },
             twitter: {
                 title: "Twitter",
-                text: "Читайте мои твиты: @neyt_tm"
+                text: "Читайте мои твиты, но их там нету): @neyt_tm"
             },
             steam: {
                 title: "Steam",
@@ -454,6 +505,13 @@
         // Закрытие по клику вне окна
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Закрытие по ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
                 modal.classList.remove('active');
             }
         });
