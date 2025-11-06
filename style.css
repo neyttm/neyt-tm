@@ -1,0 +1,119 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #ffcccc;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    color: #cc0000;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-style: italic;
+    color: #666;
+    margin-top: 0;
+}
+
+.freddy-container {
+    position: relative;
+    margin: 30px 0;
+}
+
+#freddy-img {
+    width: 200px;
+    transition: all 0.5s ease;
+}
+
+.speech-bubble {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 2px solid #cc0000;
+    border-radius: 20px;
+    padding: 15px;
+    width: 250px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    border: 15px solid transparent;
+    border-top-color: #cc0000;
+    transform: translateX(-50%);
+}
+
+.pizza-container {
+    margin: 30px 0;
+}
+
+#pizza-img {
+    width: 300px;
+    transition: all 0.5s ease;
+}
+
+.ingredients {
+    margin: 30px 0;
+}
+
+button {
+    background-color: #cc0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff0000;
+    transform: scale(1.1);
+}
+
+.result {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #fff9c4;
+    border-radius: 10px;
+    border: 2px dashed #cc0000;
+    min-height: 100px;
+    display: none;
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 12px;
+    color: #999;
+}
+
+/* Анимация "побега" Фредди */
+@keyframes escape {
+    0% { transform: translateX(0) rotate(0); }
+    50% { transform: translateX(100px) rotate(45deg); }
+    100% { transform: translateX(1000px) rotate(180deg); opacity: 0; }
+}
+
+.escape {
+    animation: escape 2s forwards;
+}
