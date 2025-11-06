@@ -1,119 +1,129 @@
-body {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    background-color: #ffcccc;
-    color: #333;
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0a;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    height: 100vh;
+    overflow: hidden;
+    cursor: none;
+}
+
+.terminal {
     padding: 20px;
-    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+.header {
+    border-bottom: 1px solid #00ff00;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
 }
 
-header h1 {
-    color: #cc0000;
-    margin-bottom: 5px;
+.blink {
+    animation: blink 1s infinite;
 }
 
-.subtitle {
-    font-style: italic;
-    color: #666;
-    margin-top: 0;
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
-.freddy-container {
-    position: relative;
-    margin: 30px 0;
+.output {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
 }
 
-#freddy-img {
-    width: 200px;
-    transition: all 0.5s ease;
+.line {
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: type 0.5s forwards;
+    animation-delay: calc(var(--delay) * 0.2s);
 }
 
-.speech-bubble {
-    position: absolute;
-    top: -80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #fff;
-    border: 2px solid #cc0000;
-    border-radius: 20px;
-    padding: 15px;
-    width: 250px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+@keyframes type {
+    to {
+        opacity: 1;
+    }
 }
 
-.speech-bubble:after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    border: 15px solid transparent;
-    border-top-color: #cc0000;
-    transform: translateX(-50%);
+.input-line {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #00ff00;
+    padding-top: 10px;
 }
 
-.pizza-container {
-    margin: 30px 0;
+.prompt {
+    margin-right: 10px;
 }
 
-#pizza-img {
-    width: 300px;
-    transition: all 0.5s ease;
-}
-
-.ingredients {
-    margin: 30px 0;
-}
-
-button {
-    background-color: #cc0000;
-    color: white;
+#command-input {
+    background: transparent;
     border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
     font-size: 16px;
-    transition: all 0.3s ease;
+    width: 100%;
+    outline: none;
 }
 
-button:hover {
-    background-color: #ff0000;
-    transform: scale(1.1);
+/* Секретное сообщение */
+.secret-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ff0000;
+    font-size: 24px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000;
 }
 
-.result {
-    margin: 30px 0;
-    padding: 20px;
-    background-color: #fff9c4;
-    border-radius: 10px;
-    border: 2px dashed #cc0000;
-    min-height: 100px;
-    display: none;
+/* Эффект глитча */
+.glitch {
+    animation: glitch 0.3s infinite;
 }
 
-footer {
-    margin-top: 30px;
-    font-size: 12px;
-    color: #999;
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
 }
 
-/* Анимация "побега" Фредди */
-@keyframes escape {
-    0% { transform: translateX(0) rotate(0); }
-    50% { transform: translateX(100px) rotate(45deg); }
-    100% { transform: translateX(1000px) rotate(180deg); opacity: 0; }
+/* Мерцающий текст */
+.flicker {
+    animation: flicker 2s infinite alternate;
 }
 
-.escape {
-    animation: escape 2s forwards;
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        opacity: 0;
+    }
+}
+
+/* Скрытый курсор */
+body::after {
+    content: '▊';
+    position: fixed;
+    color: #00ff00;
+    font-size: 16px;
+    pointer-events: none;
+    animation: blink 1s infinite;
 }
