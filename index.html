@@ -1,40 +1,81 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Honey Pie Archives</title>
+    <title>neyt_tm</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎧</text></svg>">
 </head>
 <body>
-    <!-- YouTube видео как фоновая музыка -->
-    <div id="youtube-player" style="position: fixed; top: -100px; left: -100px; width: 10px; height: 10px; opacity: 0.01; pointer-events: none;"></div>
-
-    <div class="terminal">
-        <div class="header">
-            <span class="blink">█</span> THE HONEY PIE ARCHIVES - ACCESS LEVEL: [REDACTED]
+    <div class="background"></div>
+    
+    <main class="container">
+        <!-- Центральное размытое окно с плеером -->
+        <div class="player-window">
+            <div class="album-art">
+                <!-- Можно заменить на свою обложку -->
+                <div class="placeholder-art">Tame Impala - Borderline</div>
+            </div>
+            <div class="track-info">
+                <h1 class="track-title">Borderline</h1>
+                <p class="track-artist">Tame Impala</p>
+            </div>
+            <div class="player-controls">
+                <audio id="audio-player" loop>
+                    <!-- ЗАМЕНИТЕ ССЫЛКУ НА ВАШ ФАЙЛ -->
+                    <source src="tame_impala_borderline.mp3" type="audio/mpeg">
+                    Ваш браузер не поддерживает аудио элемент.
+                </audio>
+                <button id="play-pause-btn" class="control-btn">▶️</button>
+                <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
+            </div>
         </div>
-        
-        <div class="output">
-            <div class="line">> INITIALIZING SYSTEM... [OK]</div>
-            <div class="line">> LOADING ARCHIVE 734... [OK]</div>
-            <div class="line">> WELCOME, USER.</div>
-            <div class="line">> THEY TOLD ME YOU WOULD COME.</div>
-            <div class="line">> CAN YOU HEAR THE MUSIC TOO?</div>
-            <div class="line">> IT NEVER STOPS PLAYING.</div>
-            <div class="line">> TYPE 'HELP' FOR AVAILABLE COMMANDS.</div>
-        </div>
+    </main>
 
-        <div class="input-line">
-            <span class="prompt">></span>
-            <input type="text" id="command-input" autocomplete="off" autofocus>
-        </div>
-    </div>
+    <!-- Нижняя панель с иконками соцсетей -->
+    <footer class="social-links">
+        <a href="https://discord.com/users/neyt_tm" target="_blank" title="Discord">
+            <img src="https://cdn.simpleicons.org/discord" alt="Discord">
+        </a>
+        <a href="https://www.reddit.com/user/neyt_tm" target="_blank" title="Reddit">
+            <img src="https://cdn.simpleicons.org/reddit" alt="Reddit">
+        </a>
+        <a href="https://www.tiktok.com/@neyt_tm" target="_blank" title="TikTok">
+            <img src="https://cdn.simpleicons.org/tiktok" alt="TikTok">
+        </a>
+        <a href="https://t.me/neyt_tm" target="_blank" title="Telegram">
+            <img src="https://cdn.simpleicons.org/telegram" alt="Telegram">
+        </a>
+        <a href="https://www.instagram.com/neyt_tm" target="_blank" title="Instagram">
+            <img src="https://cdn.simpleicons.org/instagram" alt="Instagram">
+        </a>
+        <a href="https://open.spotify.com/user/neyt_tm" target="_blank" title="Spotify">
+            <img src="https://cdn.simpleicons.org/spotify" alt="Spotify">
+        </a>
+        <a href="https://twitch.tv/neyt_tm" target="_blank" title="Twitch">
+            <img src="https://cdn.simpleicons.org/twitch" alt="Twitch">
+        </a>
+        <a href="https://youtube.com/@neyt_tm" target="_blank" title="YouTube">
+            <img src="https://cdn.simpleicons.org/youtube" alt="YouTube">
+        </a>
+        <a href="https://xbox.com" target="_blank" title="XBox">
+            <img src="https://cdn.simpleicons.org/xbox" alt="XBox">
+        </a>
+        <a href="https://twitter.com/neyt_tm" target="_blank" title="X (Twitter)">
+            <img src="https://cdn.simpleicons.org/x" alt="X (Twitter)">
+        </a>
+        <a href="https://steamcommunity.com/id/neyt_tm" target="_blank" title="Steam">
+            <img src="https://cdn.simpleicons.org/steam" alt="Steam">
+        </a>
+        <a href="https://github.com/neyttm" target="_blank" title="GitHub">
+            <img src="https://cdn.simpleicons.org/github" alt="GitHub">
+        </a>
+        <a href="mailto:Imamov0605@gmail.com" title="Gmail">
+            <img src="https://cdn.simpleicons.org/gmail" alt="Gmail">
+        </a>
+    </footer>
 
-    <div id="secret-message" class="secret-message"></div>
-
-    <!-- YouTube IFrame API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
 </html>
