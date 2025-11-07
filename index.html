@@ -13,10 +13,6 @@
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             min-height: 100vh;
             display: flex;
@@ -27,57 +23,17 @@
             color: #2c3e50;
             position: relative;
             overflow-x: hidden;
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            perspective: 1000;
         }
 
-        /* Анимированный градиент для фона */
-        .gradient-background {
+        /* Видео фон */
+        .video-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+            object-fit: cover;
             z-index: -2;
-            transform: translateZ(0);
-            will-change: background-position;
-        }
-
-        /* Градиент для модального окна */
-        .modal-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
-            background-size: 400% 400%;
-            animation: gradient 12s ease infinite;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s ease;
-        }
-
-        .modal-gradient.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
         }
 
         .overlay {
@@ -99,7 +55,6 @@
             flex-direction: column;
             align-items: center;
             gap: 40px;
-            transform: translateZ(0);
         }
 
         .main-image {
@@ -108,14 +63,7 @@
             height: auto;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             border-radius: 12px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            transform: translateZ(0);
-        }
-
-        .main-image:hover {
-            transform: scale(1.03) translateY(-5px);
-            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.3);
         }
 
         .furina-container {
@@ -126,7 +74,6 @@
             height: 400px;
             overflow: hidden;
             z-index: 10;
-            transform: translateZ(0);
         }
 
         .furina-image {
@@ -135,12 +82,6 @@
             object-fit: contain;
             object-position: bottom right;
             filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.3));
-            transition: transform 0.4s ease;
-            transform: translateZ(0);
-        }
-
-        .furina-image:hover {
-            transform: scale(1.05);
         }
 
         .social-links {
@@ -151,7 +92,7 @@
             margin-top: 30px;
         }
 
-        /* Анимированные кнопки с улучшенными эффектами */
+        /* Стеклянные кнопки */
         .social-link {
             display: flex;
             align-items: center;
@@ -165,63 +106,29 @@
             color: #2c3e50;
             font-size: 26px;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 
                 0 8px 25px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            transform: translateZ(0);
-            will-change: transform;
-        }
-
-        /* Анимация сияния при наведении */
-        .social-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.6), 
-                transparent);
-            transition: left 0.8s ease;
         }
 
         .social-link:hover {
-            transform: translateY(-10px) scale(1.12);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
             background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(0, 0, 0, 0.15);
-        }
-
-        .social-link:hover::before {
-            left: 100%;
-        }
-
-        .social-link:active {
-            transform: translateY(-3px) scale(0.95);
-            transition: transform 0.1s;
         }
 
         /* Индивидуальные цвета для иконок */
-        .social-link:nth-child(1):hover { background: rgba(88, 101, 242, 0.3); } /* Discord */
-        .social-link:nth-child(2):hover { background: rgba(255, 69, 0, 0.3); } /* Reddit */
-        .social-link:nth-child(3):hover { background: rgba(0, 0, 0, 0.3); color: white; } /* TikTok */
-        .social-link:nth-child(4):hover { background: rgba(0, 136, 204, 0.3); } /* Telegram */
-        .social-link:nth-child(5):hover { background: rgba(225, 48, 108, 0.3); } /* Instagram */
-        .social-link:nth-child(6):hover { background: rgba(30, 215, 96, 0.3); } /* Spotify */
-        .social-link:nth-child(7):hover { background: rgba(100, 65, 165, 0.3); } /* Twitch */
-        .social-link:nth-child(8):hover { background: rgba(255, 0, 0, 0.3); } /* YouTube */
-        .social-link:nth-child(9):hover { background: rgba(16, 124, 16, 0.3); } /* Xbox */
-        .social-link:nth-child(10):hover { background: rgba(29, 161, 242, 0.3); } /* Twitter */
-        .social-link:nth-child(11):hover { background: rgba(27, 40, 56, 0.3); } /* Steam */
-        .social-link:nth-child(12):hover { background: rgba(36, 41, 46, 0.3); } /* GitHub */
+        .social-link:nth-child(1):hover { background: rgba(88, 101, 242, 0.3); }
+        .social-link:nth-child(2):hover { background: rgba(255, 69, 0, 0.3); }
+        .social-link:nth-child(3):hover { background: rgba(0, 0, 0, 0.3); color: white; }
+        .social-link:nth-child(4):hover { background: rgba(0, 136, 204, 0.3); }
+        .social-link:nth-child(5):hover { background: rgba(225, 48, 108, 0.3); }
+        .social-link:nth-child(6):hover { background: rgba(30, 215, 96, 0.3); }
+        .social-link:nth-child(7):hover { background: rgba(100, 65, 165, 0.3); }
+        .social-link:nth-child(8):hover { background: rgba(255, 0, 0, 0.3); }
+        .social-link:nth-child(9):hover { background: rgba(16, 124, 16, 0.3); }
+        .social-link:nth-child(10):hover { background: rgba(29, 161, 242, 0.3); }
+        .social-link:nth-child(11):hover { background: rgba(27, 40, 56, 0.3); }
+        .social-link:nth-child(12):hover { background: rgba(36, 41, 46, 0.3); }
 
         .email-link {
             display: inline-flex;
@@ -235,16 +142,12 @@
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            transition: all 0.4s ease;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(0, 0, 0, 0.1);
-            transform: translateZ(0);
         }
 
         .email-link:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
         .social-section {
@@ -265,10 +168,9 @@
             padding: 15px 30px;
             border-radius: 12px;
             border: 1px solid rgba(0, 0, 0, 0.1);
-            transform: translateZ(0);
         }
 
-        /* Стеклянное модальное окно с тонкими черными границами */
+        /* Стеклянное модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -279,13 +181,10 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: opacity 0.5s ease;
         }
 
         .modal.active {
             display: flex;
-            opacity: 1;
         }
 
         .modal-content {
@@ -293,7 +192,7 @@
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
             padding: 50px;
-            border: 1.5px solid rgba(0, 0, 0, 0.3); /* Тонкая черная граница */
+            border: 1.5px solid rgba(0, 0, 0, 0.3);
             box-shadow: 
                 0 25px 50px rgba(0, 0, 0, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -301,29 +200,9 @@
             width: 90%;
             text-align: center;
             border-radius: 20px;
-            transform: scale(0.7) translateY(30px) rotateX(15deg);
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             color: #2c3e50;
             position: relative;
             overflow: hidden;
-        }
-
-        /* Эффект стекла */
-        .modal-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.6), 
-                transparent);
-        }
-
-        .modal.active .modal-content {
-            transform: scale(1) translateY(0) rotateX(0);
         }
 
         .modal-title {
@@ -351,15 +230,11 @@
             font-size: 16px;
             text-decoration: none;
             border-radius: 10px;
-            transition: all 0.3s ease;
             margin: 10px 5px;
-            transform: translateZ(0);
         }
 
         .modal-link:hover {
             background: rgba(255, 255, 255, 0.35);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .close-btn {
@@ -369,51 +244,14 @@
             padding: 12px 30px;
             font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
             border-radius: 10px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             margin-top: 15px;
-            transform: translateZ(0);
         }
 
         .close-btn:hover {
             background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Анимация пульсации */
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-            }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        /* Анимация появления */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease forwards;
         }
 
         @media (max-width: 768px) {
@@ -465,60 +303,59 @@
     </style>
 </head>
 <body>
-    <!-- Основной градиент -->
-    <div class="gradient-background"></div>
-    
-    <!-- Градиент для модального окна -->
-    <div class="modal-gradient" id="modal-gradient"></div>
+    <!-- Видео фон -->
+    <video class="video-background" autoplay muted loop>
+        <source src="video.mp4" type="video/mp4">
+    </video>
     
     <div class="overlay"></div>
 
     <div class="container">
         <!-- Основное изображение -->
-        <img src="main.jpg" alt="Main Image" class="main-image fade-in-up">
+        <img src="main.jpg" alt="Main Image" class="main-image">
         
         <!-- Социальные сети -->
         <div class="social-section">
-            <h3 class="social-title fade-in-up">Мои социальные сети</h3>
+            <h3 class="social-title">Мои социальные сети</h3>
             <div class="social-links">
-                <a href="#" class="social-link fade-in-up" data-modal="discord" style="animation-delay: 0.1s">
+                <a href="#" class="social-link" data-modal="discord">
                     <i class="fab fa-discord"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up" data-modal="reddit" style="animation-delay: 0.2s">
+                <a href="#" class="social-link" data-modal="reddit">
                     <i class="fab fa-reddit"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up" data-modal="tiktok" style="animation-delay: 0.3s">
+                <a href="#" class="social-link" data-modal="tiktok">
                     <i class="fab fa-tiktok"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up" data-modal="telegram" style="animation-delay: 0.4s">
+                <a href="#" class="social-link" data-modal="telegram">
                     <i class="fab fa-telegram"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up" data-modal="instagram" style="animation-delay: 0.5s">
+                <a href="#" class="social-link" data-modal="instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up pulse" data-modal="spotify" style="animation-delay: 0.6s">
+                <a href="#" class="social-link" data-modal="spotify">
                     <i class="fab fa-spotify"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up" data-modal="twitch" style="animation-delay: 0.7s">
+                <a href="#" class="social-link" data-modal="twitch">
                     <i class="fab fa-twitch"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up" data-modal="youtube" style="animation-delay: 0.8s">
+                <a href="#" class="social-link" data-modal="youtube">
                     <i class="fab fa-youtube"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up" data-modal="xbox" style="animation-delay: 0.9s">
+                <a href="#" class="social-link" data-modal="xbox">
                     <i class="fab fa-xbox"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up" data-modal="twitter" style="animation-delay: 1.0s">
+                <a href="#" class="social-link" data-modal="twitter">
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up" data-modal="steam" style="animation-delay: 1.1s">
+                <a href="#" class="social-link" data-modal="steam">
                     <i class="fab fa-steam"></i>
                 </a>
-                <a href="#" class="social-link fade-in-up" data-modal="github" style="animation-delay: 1.2s">
+                <a href="#" class="social-link" data-modal="github">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
-            <a href="mailto:Imamov0605@gmail.com" class="email-link fade-in-up" style="animation-delay: 1.3s">
+            <a href="mailto:Imamov0605@gmail.com" class="email-link">
                 <i class="fas fa-envelope" style="margin-right: 10px;"></i> Imamov0605@gmail.com
             </a>
         </div>
@@ -621,13 +458,12 @@
 
         // Элементы
         const modal = document.getElementById('modal');
-        const modalGradient = document.getElementById('modal-gradient');
         const modalTitle = document.getElementById('modal-title');
         const modalText = document.getElementById('modal-text');
         const modalLink = document.getElementById('modal-link');
         const closeBtn = document.getElementById('close-modal');
 
-        // Открытие модального окна с анимацией
+        // Открытие модального окна
         document.querySelectorAll('.social-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -640,17 +476,8 @@
                     modalLink.href = modalData[platform].link;
                     modalLink.textContent = modalData[platform].linkText;
                     
-                    // Анимация нажатия кнопки
-                    link.style.transform = 'translateY(-2px) scale(0.95)';
-                    setTimeout(() => {
-                        link.style.transform = '';
-                    }, 150);
-                    
-                    // Активируем градиент и модальное окно
-                    modalGradient.classList.add('active');
-                    setTimeout(() => {
-                        modal.classList.add('active');
-                    }, 200);
+                    // Активируем модальное окно
+                    modal.classList.add('active');
                 }
             });
         });
@@ -658,9 +485,6 @@
         // Закрытие модального окна
         function closeModal() {
             modal.classList.remove('active');
-            setTimeout(() => {
-                modalGradient.classList.remove('active');
-            }, 300);
         }
 
         closeBtn.addEventListener('click', closeModal);
@@ -677,13 +501,6 @@
             if (e.key === 'Escape') {
                 closeModal();
             }
-        });
-
-        // Оптимизация
-        window.addEventListener('load', function() {
-            document.querySelectorAll('.social-link').forEach(link => {
-                link.style.willChange = 'transform';
-            });
         });
     </script>
 </body>
