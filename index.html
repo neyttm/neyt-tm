@@ -57,33 +57,6 @@
             gap: 40px;
         }
 
-        .main-image {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .furina-container {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            width: 300px;
-            height: 400px;
-            overflow: hidden;
-            z-index: 10;
-        }
-
-        .furina-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: bottom right;
-            filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.3));
-        }
-
         .social-links {
             display: flex;
             flex-wrap: wrap;
@@ -110,10 +83,12 @@
                 0 8px 25px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         .social-link:hover {
             background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
         }
 
         /* Индивидуальные цвета для иконок */
@@ -144,10 +119,12 @@
             -webkit-backdrop-filter: blur(15px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         .email-link:hover {
             background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
         }
 
         .social-section {
@@ -181,6 +158,7 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .modal.active {
@@ -231,10 +209,12 @@
             text-decoration: none;
             border-radius: 10px;
             margin: 10px 5px;
+            transition: all 0.3s ease;
         }
 
         .modal-link:hover {
             background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-3px);
         }
 
         .close-btn {
@@ -248,18 +228,15 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             margin-top: 15px;
+            transition: all 0.3s ease;
         }
 
         .close-btn:hover {
             background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
         }
 
         @media (max-width: 768px) {
-            .furina-container {
-                width: 200px;
-                height: 300px;
-            }
-            
             .social-link {
                 width: 55px;
                 height: 55px;
@@ -279,11 +256,6 @@
         }
 
         @media (max-width: 480px) {
-            .furina-container {
-                width: 150px;
-                height: 200px;
-            }
-            
             .social-link {
                 width: 50px;
                 height: 50px;
@@ -304,16 +276,14 @@
 </head>
 <body>
     <!-- Видео фон -->
-    <video class="video-background" autoplay muted loop>
+    <video class="video-background" autoplay muted loop playsinline>
         <source src="video.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео тег.
     </video>
     
     <div class="overlay"></div>
 
     <div class="container">
-        <!-- Основное изображение -->
-        <img src="main.jpg" alt="Main Image" class="main-image">
-        
         <!-- Социальные сети -->
         <div class="social-section">
             <h3 class="social-title">Мои социальные сети</h3>
@@ -359,11 +329,6 @@
                 <i class="fas fa-envelope" style="margin-right: 10px;"></i> Imamov0605@gmail.com
             </a>
         </div>
-    </div>
-
-    <!-- Фурина с удаленным фоном -->
-    <div class="furina-container">
-        <img src="furina.png" alt="Furina" class="furina-image">
     </div>
 
     <!-- Модальное окно -->
