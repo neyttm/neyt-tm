@@ -25,7 +25,6 @@
             position: relative;
             overflow-x: hidden;
             font-weight: 500;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         /* Видео фон */
@@ -45,9 +44,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
             z-index: -1;
         }
 
@@ -68,25 +65,25 @@
             margin-top: 30px;
         }
 
-        /* Супер стеклянные кнопки */
+        /* Стеклянные кнопки в стиле iOS с анимацией */
         .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 28px;
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #2c3e50;
+            font-size: 26px;
             text-decoration: none;
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.2),
-                inset 0 1px 1px rgba(255, 255, 255, 0.4),
-                inset 0 -2px 2px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+                0 8px 25px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -96,34 +93,31 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.3), 
-                transparent);
-            transition: left 0.6s ease;
-        }
-
-        .social-link:hover::before {
-            left: 100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .social-link:hover {
             background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(35px) saturate(200%);
-            -webkit-backdrop-filter: blur(35px) saturate(200%);
-            transform: translateY(-8px) scale(1.15);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            transform: translateY(-8px) scale(1.1);
             box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                inset 0 2px 2px rgba(255, 255, 255, 0.5),
-                inset 0 -2px 2px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+                0 15px 35px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
         }
 
         .social-link:active {
-            transform: translateY(-4px) scale(1.1);
+            transform: translateY(-4px) scale(1.05);
             transition: all 0.1s ease;
         }
 
@@ -131,31 +125,30 @@
             display: inline-flex;
             align-items: center;
             margin-top: 25px;
-            color: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
             text-decoration: none;
             font-size: 18px;
-            padding: 16px 32px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            padding: 14px 28px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.2),
-                inset 0 1px 1px rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+                0 8px 25px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             transition: all 0.3s ease;
             font-weight: 500;
         }
 
         .email-link:hover {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(35px) saturate(200%);
-            -webkit-backdrop-filter: blur(35px) saturate(200%);
-            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transform: translateY(-4px);
             box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.25),
-                inset 0 2px 2px rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+                0 12px 30px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
         }
 
         .social-section {
@@ -167,21 +160,21 @@
         .social-title {
             font-size: 28px;
             margin-bottom: 30px;
-            color: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
             font-weight: 600;
-            padding: 20px 40px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+            padding: 15px 30px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.2),
-                inset 0 1px 1px rgba(255, 255, 255, 0.4);
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                0 8px 25px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
-        /* Стеклянное модальное окно */
+        /* Стеклянное модальное окно в стиле iOS */
         .modal {
             display: none;
             position: fixed;
@@ -192,9 +185,9 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .modal.active {
@@ -202,19 +195,19 @@
         }
 
         .modal-content {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(40px) saturate(180%);
-            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             padding: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.3),
-                inset 0 2px 2px rgba(255, 255, 255, 0.5);
+                0 25px 50px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
             max-width: 500px;
             width: 90%;
             text-align: center;
-            border-radius: 28px;
-            color: rgba(255, 255, 255, 0.9);
+            border-radius: 24px;
+            color: #2c3e50;
             position: relative;
             overflow: hidden;
             animation: modalAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -234,154 +227,109 @@
         .modal-title {
             font-size: 32px;
             margin-bottom: 20px;
-            color: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
             font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .modal-text {
             font-size: 18px;
             line-height: 1.6;
             margin-bottom: 25px;
-            color: rgba(255, 255, 255, 0.8);
+            color: #34495e;
             font-weight: 500;
         }
 
         .modal-link {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: rgba(255, 255, 255, 0.9);
-            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #2c3e50;
+            padding: 12px 30px;
             font-size: 16px;
             text-decoration: none;
-            border-radius: 14px;
+            border-radius: 12px;
             margin: 10px 5px;
             transition: all 0.3s ease;
-            box-shadow: 
-                0 8px 20px rgba(0, 0, 0, 0.2),
-                inset 0 1px 1px rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             font-weight: 500;
         }
 
         .modal-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(35px) saturate(200%);
-            -webkit-backdrop-filter: blur(35px) saturate(200%);
-            transform: translateY(-4px);
-            box-shadow: 
-                0 12px 25px rgba(0, 0, 0, 0.25),
-                inset 0 2px 2px rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         .close-btn {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: rgba(255, 255, 255, 0.9);
-            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #2c3e50;
+            padding: 12px 30px;
             font-size: 16px;
             cursor: pointer;
-            border-radius: 14px;
+            border-radius: 12px;
             margin-top: 15px;
             transition: all 0.3s ease;
-            box-shadow: 
-                0 8px 20px rgba(0, 0, 0, 0.2),
-                inset 0 1px 1px rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             font-weight: 500;
         }
 
         .close-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(35px) saturate(200%);
-            -webkit-backdrop-filter: blur(35px) saturate(200%);
-            transform: translateY(-4px);
-            box-shadow: 
-                0 12px 25px rgba(0, 0, 0, 0.25),
-                inset 0 2px 2px rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         /* Дополнительный iOS стеклянный элемент */
         .ios-glass {
-            padding: 2rem 2.5rem;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(35px) saturate(180%);
-            -webkit-backdrop-filter: blur(35px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.25),
-                inset 0 2px 2px rgba(255, 255, 255, 0.4);
+                0 8px 25px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
             margin: 20px 0;
             text-align: center;
-            color: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
             font-size: 18px;
             max-width: 600px;
             width: 90%;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         .ios-glass:hover {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(45px) saturate(200%);
-            -webkit-backdrop-filter: blur(45px) saturate(200%);
-            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            transform: translateY(-5px);
             box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                inset 0 2px 2px rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+                0 12px 30px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
         }
 
         .ios-glass h3 {
-            font-size: 26px;
-            margin-bottom: 12px;
+            font-size: 24px;
+            margin-bottom: 10px;
             font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .ios-glass p {
             font-weight: 500;
-            line-height: 1.6;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            line-height: 1.5;
         }
 
         @media (max-width: 768px) {
-            .social-link {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-                border-radius: 18px;
-            }
-
-            .social-link:hover {
-                transform: translateY(-6px) scale(1.12);
-            }
-
-            .modal-content {
-                padding: 30px 20px;
-                border-radius: 24px;
-            }
-
-            .social-title {
-                font-size: 24px;
-                padding: 16px 30px;
-            }
-            
-            .ios-glass {
-                padding: 1.5rem 2rem;
-                font-size: 16px;
-                border-radius: 20px;
-            }
-
-            .ios-glass h3 {
-                font-size: 22px;
-            }
-        }
-
-        @media (max-width: 480px) {
             .social-link {
                 width: 55px;
                 height: 55px;
@@ -390,27 +338,59 @@
             }
 
             .social-link:hover {
-                transform: translateY(-4px) scale(1.08);
+                transform: translateY(-6px) scale(1.08);
             }
-            
-            .email-link {
-                font-size: 16px;
-                padding: 14px 28px;
+
+            .modal-content {
+                padding: 30px 20px;
+                border-radius: 20px;
             }
 
             .social-title {
-                font-size: 20px;
-                padding: 14px 24px;
+                font-size: 24px;
+                padding: 12px 25px;
             }
             
             .ios-glass {
                 padding: 1.2rem 1.5rem;
-                font-size: 14px;
+                font-size: 16px;
                 border-radius: 18px;
             }
 
             .ios-glass h3 {
                 font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                border-radius: 14px;
+            }
+
+            .social-link:hover {
+                transform: translateY(-4px) scale(1.05);
+            }
+            
+            .email-link {
+                font-size: 16px;
+                padding: 12px 24px;
+            }
+
+            .social-title {
+                font-size: 20px;
+            }
+            
+            .ios-glass {
+                padding: 1rem;
+                font-size: 14px;
+                border-radius: 16px;
+            }
+
+            .ios-glass h3 {
+                font-size: 18px;
             }
         }
     </style>
@@ -427,13 +407,13 @@
     <div class="container">
         <!-- Дополнительный iOS стеклянный элемент -->
         <div class="ios-glass">
-            <h3>Добро пожаловать</h3>
-            <p>Это моя страница с ссылками на социальные сети. Нажмите на любую иконку, чтобы узнать больше и перейти на мои страницы.</p>
+            <h3>аахаахахах привет </h3>
+            <p>Это моя страница с ссылками на социальные сети. да тот самый neyt) </p>
         </div>
         
         <!-- Социальные сети -->
         <div class="social-section">
-            <h3 class="social-title">Мои социальные сети (зачем они мне?)</h3>
+            <h3 class="social-title">Мои соц сети </h3>
             <div class="social-links">
                 <a href="#" class="social-link" data-modal="discord">
                     <i class="fab fa-discord"></i>
@@ -503,7 +483,7 @@
             reddit: {
                 title: "Reddit",
                 text: "Читайте мои посты, меня там только забанили(",
-                link: "https://www.reddit.com/user/neyt_tm",
+                link: "https://www.reddit.com/user/u/neyt_tm",
                 linkText: "Перейти в Reddit"
             },
             tiktok: {
