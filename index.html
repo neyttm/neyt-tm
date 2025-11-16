@@ -65,7 +65,7 @@
             margin-top: 30px;
         }
 
-        /* Стеклянные кнопки в стиле iOS с анимацией */
+        /* Улучшенный стеклянный эффект с интенсивным размытием по краям */
         .social-link {
             display: flex;
             align-items: center;
@@ -73,17 +73,18 @@
             width: 65px;
             height: 65px;
             border-radius: 18px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             color: #2c3e50;
             font-size: 26px;
             text-decoration: none;
             box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.1),
+                0 8px 25px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -96,24 +97,45 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
+            border-radius: 18px;
+        }
+
+        .social-link::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 100%);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: blur(8px);
         }
 
         .social-link:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             transform: translateY(-8px) scale(1.1);
             box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+                0 15px 35px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.3);
         }
 
         .social-link:hover::before {
             opacity: 1;
+        }
+
+        .social-link:hover::after {
+            opacity: 0.7;
         }
 
         .social-link:active {
@@ -130,25 +152,65 @@
             font-size: 18px;
             padding: 14px 28px;
             border-radius: 14px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+                0 8px 25px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             transition: all 0.3s ease;
             font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .email-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 14px;
+        }
+
+        .email-link::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 100%);
+            border-radius: 16px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: blur(10px);
         }
 
         .email-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             transform: translateY(-4px);
             box-shadow: 
-                0 12px 30px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                0 12px 30px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+
+        .email-link:hover::before {
+            opacity: 1;
+        }
+
+        .email-link:hover::after {
+            opacity: 0.7;
         }
 
         .social-section {
@@ -165,16 +227,55 @@
             text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
             padding: 15px 30px;
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+                0 8px 25px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Стеклянное модальное окно в стиле iOS */
+        .social-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 16px;
+        }
+
+        .social-title::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 100%);
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: blur(12px);
+        }
+
+        .social-title:hover::before {
+            opacity: 1;
+        }
+
+        .social-title:hover::after {
+            opacity: 0.7;
+        }
+
+        /* Улучшенное стеклянное модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -185,9 +286,9 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .modal.active {
@@ -195,14 +296,15 @@
         }
 
         .modal-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             padding: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.7);
             box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                0 0 0 1px rgba(255, 255, 255, 0.3);
             max-width: 500px;
             width: 90%;
             text-align: center;
@@ -211,6 +313,31 @@
             position: relative;
             overflow: hidden;
             animation: modalAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 100%);
+            border-radius: 24px;
+        }
+
+        .modal-content::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.2) 100%);
+            border-radius: 28px;
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.8;
         }
 
         @keyframes modalAppear {
@@ -229,6 +356,8 @@
             margin-bottom: 20px;
             color: #2c3e50;
             font-weight: 600;
+            position: relative;
+            z-index: 1;
         }
 
         .modal-text {
@@ -237,14 +366,16 @@
             margin-bottom: 25px;
             color: #34495e;
             font-weight: 500;
+            position: relative;
+            z-index: 1;
         }
 
         .modal-link {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             color: #2c3e50;
             padding: 12px 30px;
             font-size: 16px;
@@ -254,21 +385,41 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             font-weight: 500;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .modal-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
         }
 
         .modal-link:hover {
-            background: rgba(255, 255, 255, 1);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
+        .modal-link:hover::before {
+            opacity: 1;
+        }
+
         .close-btn {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             color: #2c3e50;
             padding: 12px 30px;
             font-size: 16px;
@@ -278,27 +429,48 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             font-weight: 500;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .close-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
         }
 
         .close-btn:hover {
-            background: rgba(255, 255, 255, 1);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
-        /* Дополнительный iOS стеклянный элемент */
+        .close-btn:hover::before {
+            opacity: 1;
+        }
+
+        /* Улучшенный iOS стеклянный элемент */
         .ios-glass {
             padding: 1.5rem 2rem;
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+                0 8px 25px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
             margin: 20px 0;
             text-align: center;
             color: #2c3e50;
@@ -306,27 +478,70 @@
             max-width: 600px;
             width: 90%;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ios-glass::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 20px;
+        }
+
+        .ios-glass::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 100%);
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: blur(12px);
         }
 
         .ios-glass:hover {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
             transform: translateY(-5px);
             box-shadow: 
-                0 12px 30px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                0 12px 30px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+
+        .ios-glass:hover::before {
+            opacity: 1;
+        }
+
+        .ios-glass:hover::after {
+            opacity: 0.7;
         }
 
         .ios-glass h3 {
             font-size: 24px;
             margin-bottom: 10px;
             font-weight: 600;
+            position: relative;
+            z-index: 1;
         }
 
         .ios-glass p {
             font-weight: 500;
             line-height: 1.5;
+            position: relative;
+            z-index: 1;
         }
 
         @media (max-width: 768px) {
