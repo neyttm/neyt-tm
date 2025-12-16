@@ -25,6 +25,7 @@
             position: relative;
             overflow-x: hidden;
             font-weight: 500;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
         /* Видео фон */
@@ -36,6 +37,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
+            filter: brightness(0.8) saturate(1.2);
         }
 
         .overlay {
@@ -44,7 +46,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.1);
+            background: radial-gradient(
+                circle at center,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(200, 200, 255, 0.1) 100%
+            );
             z-index: -1;
         }
 
@@ -55,6 +62,7 @@
             flex-direction: column;
             align-items: center;
             gap: 40px;
+            padding: 20px;
         }
 
         .social-links {
@@ -65,59 +73,40 @@
             margin-top: 30px;
         }
 
-        /* Эффект стекла с размытыми краями и прозрачным центром */
+        /* Обновленный эффект стекла с градиентным размытием */
         .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 65px;
-            height: 65px;
-            border-radius: 18px;
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
             background: 
                 radial-gradient(
-                    circle at center,
-                    rgba(255, 255, 255, 0.1) 0%,
-                    rgba(255, 255, 255, 0.05) 60%,
-                    rgba(255, 255, 255, 0.15) 100%
+                    circle at 50% 50%,
+                    rgba(255, 255, 255, 0.25) 0%,
+                    rgba(255, 255, 255, 0.15) 40%,
+                    rgba(255, 255, 255, 0.05) 70%,
+                    rgba(255, 255, 255, 0.01) 100%
                 );
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             color: #2c3e50;
-            font-size: 26px;
+            font-size: 28px;
             text-decoration: none;
             box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+                0 10px 30px rgba(0, 0, 0, 0.15),
+                inset 0 1px 1px rgba(255, 255, 255, 0.4),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
-        /* Размытая рамка по краям */
+        /* Градиентное размытие по краям */
         .social-link::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: 
-                radial-gradient(
-                    circle at center,
-                    transparent 30%,
-                    rgba(255, 255, 255, 0.8) 100%
-                );
-            border-radius: 21px;
-            z-index: -1;
-            filter: blur(15px);
-            opacity: 0.6;
-            transition: all 0.4s ease;
-        }
-
-        /* Внутреннее свечение по краям */
-        .social-link::after {
             content: '';
             position: absolute;
             top: 0;
@@ -127,10 +116,33 @@
             background: 
                 radial-gradient(
                     circle at center,
-                    transparent 40%,
-                    rgba(255, 255, 255, 0.2) 100%
+                    transparent 30%,
+                    rgba(255, 255, 255, 0.6) 100%
                 );
-            border-radius: 18px;
+            border-radius: 20px;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.6;
+            transition: all 0.4s ease;
+        }
+
+        /* Внутренняя граница для красивого края */
+        .social-link::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            right: 1px;
+            bottom: 1px;
+            border-radius: 19px;
+            background: 
+                radial-gradient(
+                    circle at 50% 50%,
+                    rgba(255, 255, 255, 0.3) 0%,
+                    rgba(255, 255, 255, 0.1) 50%,
+                    transparent 100%
+                );
+            z-index: -1;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -138,27 +150,31 @@
         .social-link:hover {
             background: 
                 radial-gradient(
-                    circle at center,
-                    rgba(255, 255, 255, 0.15) 0%,
-                    rgba(255, 255, 255, 0.08) 60%,
-                    rgba(255, 255, 255, 0.2) 100%
+                    circle at 50% 50%,
+                    rgba(255, 255, 255, 0.35) 0%,
+                    rgba(255, 255, 255, 0.2) 40%,
+                    rgba(255, 255, 255, 0.1) 70%,
+                    rgba(255, 255, 255, 0.02) 100%
                 );
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            transform: translateY(-8px) scale(1.1);
+            transform: translateY(-10px) scale(1.12);
             box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+                0 20px 40px rgba(0, 0, 0, 0.25),
+                inset 0 2px 2px rgba(255, 255, 255, 0.6),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .social-link:hover::before {
             opacity: 0.8;
-            filter: blur(20px);
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
+            filter: blur(25px);
+            background: 
+                radial-gradient(
+                    circle at center,
+                    transparent 20%,
+                    rgba(255, 255, 255, 0.8) 100%
+                );
         }
 
         .social-link:hover::after {
@@ -166,8 +182,31 @@
         }
 
         .social-link:active {
-            transform: translateY(-4px) scale(1.05);
-            transition: all 0.1s ease;
+            transform: translateY(-5px) scale(1.08);
+            transition: all 0.2s ease;
+        }
+
+        /* Эффект светового блика при наведении */
+        .social-link .light-effect {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle at center,
+                rgba(255, 255, 255, 0.8) 0%,
+                transparent 70%
+            );
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        .social-link:hover .light-effect {
+            opacity: 0.3;
+            transform: scale(1);
         }
 
         .email-link {
@@ -177,43 +216,45 @@
             color: #2c3e50;
             text-decoration: none;
             font-size: 18px;
-            padding: 14px 28px;
-            border-radius: 14px;
+            padding: 16px 32px;
+            border-radius: 16px;
             background: 
                 radial-gradient(
-                    circle at center,
-                    rgba(255, 255, 255, 0.1) 0%,
-                    rgba(255, 255, 255, 0.05) 60%,
-                    rgba(255, 255, 255, 0.15) 100%
+                    ellipse at center,
+                    rgba(255, 255, 255, 0.25) 0%,
+                    rgba(255, 255, 255, 0.15) 40%,
+                    rgba(255, 255, 255, 0.05) 70%,
+                    rgba(255, 255, 255, 0.01) 100%
                 );
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+                0 10px 30px rgba(0, 0, 0, 0.15),
+                inset 0 1px 1px rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
             font-weight: 500;
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .email-link::before {
             content: '';
             position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: 
                 radial-gradient(
-                    circle at center,
+                    ellipse at center,
                     transparent 30%,
                     rgba(255, 255, 255, 0.7) 100%
                 );
-            border-radius: 17px;
+            border-radius: 16px;
             z-index: -1;
-            filter: blur(12px);
+            filter: blur(15px);
             opacity: 0.5;
             transition: all 0.3s ease;
         }
@@ -221,28 +262,31 @@
         .email-link:hover {
             background: 
                 radial-gradient(
-                    circle at center,
-                    rgba(255, 255, 255, 0.15) 0%,
-                    rgba(255, 255, 255, 0.08) 60%,
-                    rgba(255, 255, 255, 0.2) 100%
+                    ellipse at center,
+                    rgba(255, 255, 255, 0.35) 0%,
+                    rgba(255, 255, 255, 0.2) 40%,
+                    rgba(255, 255, 255, 0.1) 70%,
+                    rgba(255, 255, 255, 0.02) 100%
                 );
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             box-shadow: 
-                0 12px 30px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                0 15px 35px rgba(0, 0, 0, 0.2),
+                inset 0 2px 2px rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .email-link:hover::before {
             opacity: 0.7;
-            filter: blur(15px);
+            filter: blur(20px);
         }
 
         .social-section {
             text-align: center;
             width: 100%;
             margin-top: 40px;
+            position: relative;
         }
 
         .social-title {
@@ -250,52 +294,54 @@
             margin-bottom: 30px;
             color: #2c3e50;
             font-weight: 600;
-            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
-            padding: 15px 30px;
-            border-radius: 16px;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+            padding: 20px 40px;
+            border-radius: 20px;
             background: 
                 radial-gradient(
-                    circle at center,
-                    rgba(255, 255, 255, 0.1) 0%,
-                    rgba(255, 255, 255, 0.05) 60%,
-                    rgba(255, 255, 255, 0.15) 100%
+                    ellipse at center,
+                    rgba(255, 255, 255, 0.25) 0%,
+                    rgba(255, 255, 255, 0.15) 40%,
+                    rgba(255, 255, 255, 0.05) 70%,
+                    rgba(255, 255, 255, 0.01) 100%
                 );
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                0 15px 35px rgba(0, 0, 0, 0.15),
+                inset 0 1px 1px rgba(255, 255, 255, 0.4);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .social-title::before {
             content: '';
             position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
             background: 
                 radial-gradient(
-                    circle at center,
-                    transparent 30%,
+                    ellipse at center,
+                    transparent 20%,
                     rgba(255, 255, 255, 0.8) 100%
                 );
-            border-radius: 20px;
+            border-radius: 25px;
             z-index: -1;
-            filter: blur(20px);
-            opacity: 0.5;
+            filter: blur(25px);
+            opacity: 0.6;
             transition: all 0.3s ease;
         }
 
         .social-title:hover::before {
-            opacity: 0.7;
-            filter: blur(25px);
+            opacity: 0.8;
+            filter: blur(30px);
         }
 
-        /* Модальное окно с эффектом размытых краев */
+        /* Модальное окно с обновленным эффектом */
         .modal {
             display: none;
             position: fixed;
@@ -306,34 +352,36 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .modal.active {
             display: flex;
+            animation: fadeIn 0.3s ease;
         }
 
         .modal-content {
             background: 
                 radial-gradient(
                     ellipse at center,
-                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(255, 255, 255, 0.95) 0%,
+                    rgba(255, 255, 255, 0.85) 30%,
                     rgba(255, 255, 255, 0.7) 60%,
-                    rgba(255, 255, 255, 0.95) 100%
+                    rgba(255, 255, 255, 0.5) 100%
                 );
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             padding: 50px;
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+                0 30px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
             max-width: 500px;
             width: 90%;
             text-align: center;
-            border-radius: 24px;
+            border-radius: 30px;
             color: #2c3e50;
             position: relative;
             overflow: hidden;
@@ -343,26 +391,32 @@
         .modal-content::before {
             content: '';
             position: absolute;
-            top: -6px;
-            left: -6px;
-            right: -6px;
-            bottom: -6px;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
             background: 
                 radial-gradient(
                     ellipse at center,
-                    transparent 40%,
+                    transparent 20%,
                     rgba(255, 255, 255, 0.9) 100%
                 );
-            border-radius: 30px;
+            border-radius: 40px;
             z-index: -1;
-            filter: blur(25px);
-            opacity: 0.7;
+            filter: blur(40px);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes modalAppear {
             from {
                 opacity: 0;
-                transform: scale(0.8) translateY(20px);
+                transform: scale(0.8) translateY(30px);
             }
             to {
                 opacity: 1;
@@ -377,6 +431,7 @@
             font-weight: 600;
             position: relative;
             z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .modal-text {
@@ -393,22 +448,23 @@
             display: inline-block;
             background: 
                 radial-gradient(
-                    circle at center,
-                    rgba(255, 255, 255, 0.6) 0%,
-                    rgba(255, 255, 255, 0.4) 60%,
-                    rgba(255, 255, 255, 0.7) 100%
+                    ellipse at center,
+                    rgba(255, 255, 255, 0.7) 0%,
+                    rgba(255, 255, 255, 0.5) 40%,
+                    rgba(255, 255, 255, 0.3) 70%,
+                    rgba(255, 255, 255, 0.1) 100%
                 );
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             color: #2c3e50;
-            padding: 12px 30px;
+            padding: 14px 32px;
             font-size: 16px;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 14px;
             margin: 10px 5px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             font-weight: 500;
             position: relative;
             z-index: 1;
@@ -418,19 +474,19 @@
         .modal-link::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
             background: 
                 radial-gradient(
                     circle at center,
-                    transparent 40%,
+                    transparent 30%,
                     rgba(255, 255, 255, 0.8) 100%
                 );
-            border-radius: 14px;
+            border-radius: 19px;
             z-index: -1;
-            filter: blur(8px);
+            filter: blur(15px);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -438,15 +494,16 @@
         .modal-link:hover {
             background: 
                 radial-gradient(
-                    circle at center,
-                    rgba(255, 255, 255, 0.8) 0%,
-                    rgba(255, 255, 255, 0.6) 60%,
-                    rgba(255, 255, 255, 0.9) 100%
+                    ellipse at center,
+                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(255, 255, 255, 0.7) 40%,
+                    rgba(255, 255, 255, 0.5) 70%,
+                    rgba(255, 255, 255, 0.2) 100%
                 );
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
 
         .modal-link:hover::before {
@@ -456,22 +513,23 @@
         .close-btn {
             background: 
                 radial-gradient(
-                    circle at center,
-                    rgba(255, 255, 255, 0.6) 0%,
-                    rgba(255, 255, 255, 0.4) 60%,
-                    rgba(255, 255, 255, 0.7) 100%
+                    ellipse at center,
+                    rgba(255, 255, 255, 0.7) 0%,
+                    rgba(255, 255, 255, 0.5) 40%,
+                    rgba(255, 255, 255, 0.3) 70%,
+                    rgba(255, 255, 255, 0.1) 100%
                 );
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             color: #2c3e50;
-            padding: 12px 30px;
+            padding: 14px 32px;
             font-size: 16px;
             cursor: pointer;
-            border-radius: 12px;
+            border-radius: 14px;
             margin-top: 15px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             font-weight: 500;
             position: relative;
             z-index: 1;
@@ -481,19 +539,19 @@
         .close-btn::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
             background: 
                 radial-gradient(
                     circle at center,
-                    transparent 40%,
+                    transparent 30%,
                     rgba(255, 255, 255, 0.8) 100%
                 );
-            border-radius: 14px;
+            border-radius: 19px;
             z-index: -1;
-            filter: blur(8px);
+            filter: blur(15px);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -501,106 +559,188 @@
         .close-btn:hover {
             background: 
                 radial-gradient(
-                    circle at center,
-                    rgba(255, 255, 255, 0.8) 0%,
-                    rgba(255, 255, 255, 0.6) 60%,
-                    rgba(255, 255, 255, 0.9) 100%
+                    ellipse at center,
+                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(255, 255, 255, 0.7) 40%,
+                    rgba(255, 255, 255, 0.5) 70%,
+                    rgba(255, 255, 255, 0.2) 100%
                 );
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
 
         .close-btn:hover::before {
             opacity: 0.6;
         }
 
-        /* iOS стеклянный элемент с размытыми краями */
+        /* Обновленный iOS стеклянный элемент с градиентным размытием */
         .ios-glass {
-            padding: 1.5rem 2rem;
-            border-radius: 20px;
+            padding: 2rem 2.5rem;
+            border-radius: 25px;
             background: 
                 radial-gradient(
                     ellipse at center,
-                    rgba(255, 255, 255, 0.1) 0%,
-                    rgba(255, 255, 255, 0.05) 60%,
-                    rgba(255, 255, 255, 0.15) 100%
+                    rgba(255, 255, 255, 0.3) 0%,
+                    rgba(255, 255, 255, 0.2) 30%,
+                    rgba(255, 255, 255, 0.1) 60%,
+                    rgba(255, 255, 255, 0.05) 100%
                 );
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            margin: 20px 0;
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 2px rgba(255, 255, 255, 0.5);
+            margin: 30px 0;
             text-align: center;
             color: #2c3e50;
             font-size: 18px;
             max-width: 600px;
             width: 90%;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .ios-glass::before {
             content: '';
             position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
             background: 
                 radial-gradient(
                     ellipse at center,
-                    transparent 40%,
-                    rgba(255, 255, 255, 0.7) 100%
+                    transparent 15%,
+                    rgba(255, 255, 255, 0.9) 100%
                 );
-            border-radius: 24px;
+            border-radius: 35px;
             z-index: -1;
-            filter: blur(20px);
-            opacity: 0.5;
-            transition: all 0.3s ease;
+            filter: blur(35px);
+            opacity: 0.7;
+            transition: all 0.4s ease;
         }
 
         .ios-glass:hover {
             background: 
                 radial-gradient(
                     ellipse at center,
-                    rgba(255, 255, 255, 0.15) 0%,
-                    rgba(255, 255, 255, 0.08) 60%,
-                    rgba(255, 255, 255, 0.2) 100%
+                    rgba(255, 255, 255, 0.4) 0%,
+                    rgba(255, 255, 255, 0.25) 30%,
+                    rgba(255, 255, 255, 0.15) 60%,
+                    rgba(255, 255, 255, 0.08) 100%
                 );
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            transform: translateY(-5px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            transform: translateY(-8px);
             box-shadow: 
-                0 12px 30px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+                0 30px 50px rgba(0, 0, 0, 0.2),
+                inset 0 2px 3px rgba(255, 255, 255, 0.6);
         }
 
         .ios-glass:hover::before {
-            opacity: 0.7;
-            filter: blur(25px);
+            opacity: 0.9;
+            filter: blur(45px);
+            background: 
+                radial-gradient(
+                    ellipse at center,
+                    transparent 10%,
+                    rgba(255, 255, 255, 0.95) 100%
+                );
         }
 
         .ios-glass h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 26px;
+            margin-bottom: 15px;
             font-weight: 600;
             position: relative;
             z-index: 1;
+            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.5);
         }
 
         .ios-glass p {
             font-weight: 500;
-            line-height: 1.5;
+            line-height: 1.6;
             position: relative;
             z-index: 1;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Декоративные частицы для красоты */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
         }
 
         @media (max-width: 768px) {
+            .social-link {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                border-radius: 18px;
+            }
+
+            .social-link:hover {
+                transform: translateY(-8px) scale(1.1);
+            }
+
+            .modal-content {
+                padding: 35px 25px;
+                border-radius: 25px;
+            }
+
+            .social-title {
+                font-size: 24px;
+                padding: 15px 30px;
+            }
+            
+            .ios-glass {
+                padding: 1.5rem 2rem;
+                font-size: 16px;
+                border-radius: 22px;
+            }
+
+            .ios-glass h3 {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
             .social-link {
                 width: 55px;
                 height: 55px;
@@ -611,57 +751,25 @@
             .social-link:hover {
                 transform: translateY(-6px) scale(1.08);
             }
-
-            .modal-content {
-                padding: 30px 20px;
-                border-radius: 20px;
+            
+            .email-link {
+                font-size: 16px;
+                padding: 14px 28px;
             }
 
             .social-title {
-                font-size: 24px;
+                font-size: 20px;
                 padding: 12px 25px;
             }
             
             .ios-glass {
                 padding: 1.2rem 1.5rem;
-                font-size: 16px;
-                border-radius: 18px;
+                font-size: 15px;
+                border-radius: 20px;
             }
 
             .ios-glass h3 {
                 font-size: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .social-link {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-                border-radius: 14px;
-            }
-
-            .social-link:hover {
-                transform: translateY(-4px) scale(1.05);
-            }
-            
-            .email-link {
-                font-size: 16px;
-                padding: 12px 24px;
-            }
-
-            .social-title {
-                font-size: 20px;
-            }
-            
-            .ios-glass {
-                padding: 1rem;
-                font-size: 14px;
-                border-radius: 16px;
-            }
-
-            .ios-glass h3 {
-                font-size: 18px;
             }
         }
     </style>
@@ -674,57 +782,72 @@
     </video>
     
     <div class="overlay"></div>
+    
+    <!-- Декоративные частицы -->
+    <div class="particles" id="particles"></div>
 
     <div class="container">
         <!-- Дополнительный iOS стеклянный элемент -->
         <div class="ios-glass">
-            <h3>аахаахахах привет </h3>
-            <p>Это моя страница с ссылками на социальные сети. да тот самый neyt) </p>
+            <h3>аахаахахах привет</h3>
+            <p>Это моя страница с ссылками на социальные сети. да тот самый neyt)</p>
         </div>
         
         <!-- Социальные сети -->
         <div class="social-section">
-            <h3 class="social-title">Мои соц сети </h3>
+            <h3 class="social-title">Мои соц сети</h3>
             <div class="social-links">
                 <a href="#" class="social-link" data-modal="discord">
                     <i class="fab fa-discord"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="reddit">
                     <i class="fab fa-reddit"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="tiktok">
                     <i class="fab fa-tiktok"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="telegram">
                     <i class="fab fa-telegram"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="instagram">
                     <i class="fab fa-instagram"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="spotify">
                     <i class="fab fa-spotify"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="twitch">
                     <i class="fab fa-twitch"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="youtube">
                     <i class="fab fa-youtube"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="xbox">
                     <i class="fab fa-xbox"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="twitter">
                     <i class="fab fa-twitter"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="steam">
                     <i class="fab fa-steam"></i>
+                    <div class="light-effect"></div>
                 </a>
                 <a href="#" class="social-link" data-modal="github">
                     <i class="fab fa-github"></i>
+                    <div class="light-effect"></div>
                 </a>
             </div>
             <a href="mailto:Imamov0605@gmail.com" class="email-link">
-                <i class="fas fa-envelope" style="margin-right: 10px;"></i> Imamov0605@gmail.com
+                <i class="fas fa-envelope" style="margin-right: 12px;"></i> Imamov0605@gmail.com
             </a>
         </div>
     </div>
@@ -825,6 +948,37 @@
         const modalText = document.getElementById('modal-text');
         const modalLink = document.getElementById('modal-link');
         const closeBtn = document.getElementById('close-modal');
+        const particlesContainer = document.getElementById('particles');
+
+        // Создаем декоративные частицы
+        function createParticles() {
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Случайная позиция
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // Случайный размер
+                const size = 1 + Math.random() * 4;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Случайная прозрачность
+                particle.style.opacity = 0.3 + Math.random() * 0.7;
+                
+                // Случайная задержка анимации
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                
+                // Случайная длительность анимации
+                particle.style.animationDuration = `${15 + Math.random() * 15}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
 
         // Открытие модального окна
         document.querySelectorAll('.social-link').forEach(link => {
@@ -841,6 +995,12 @@
                     
                     // Активируем модальное окно
                     modal.classList.add('active');
+                    
+                    // Добавляем небольшую вибрацию для кнопки
+                    link.style.animation = 'vibrate 0.3s ease';
+                    setTimeout(() => {
+                        link.style.animation = '';
+                    }, 300);
                 }
             });
         });
@@ -865,6 +1025,22 @@
                 closeModal();
             }
         });
+
+        // Создаем частицы при загрузке
+        document.addEventListener('DOMContentLoaded', createParticles);
+
+        // Добавляем CSS для вибрации
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes vibrate {
+                0% { transform: translateY(-10px) scale(1.12) rotate(0deg); }
+                25% { transform: translateY(-10px) scale(1.12) rotate(1deg); }
+                50% { transform: translateY(-10px) scale(1.12) rotate(-1deg); }
+                75% { transform: translateY(-10px) scale(1.12) rotate(1deg); }
+                100% { transform: translateY(-10px) scale(1.12) rotate(0deg); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
