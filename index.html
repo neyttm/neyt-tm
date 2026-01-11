@@ -1,699 +1,58 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>neyt_tm!</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>neyt tm – Official Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-
+        
         body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            color: #2c3e50;
-            position: relative;
+            background: #FFFFFF;
             overflow-x: hidden;
-            font-weight: 500;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        /* Видео фон */
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            filter: brightness(0.8) saturate(1.2);
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(
-                circle at center,
-                rgba(255, 255, 255, 0.1) 0%,
-                rgba(255, 255, 255, 0.3) 50%,
-                rgba(200, 200, 255, 0.1) 100%
-            );
-            z-index: -1;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            padding: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        /* Обновленный эффект стекла с градиентным размытием */
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
-            background: 
-                radial-gradient(
-                    circle at 50% 50%,
-                    rgba(255, 255, 255, 0.25) 0%,
-                    rgba(255, 255, 255, 0.15) 40%,
-                    rgba(255, 255, 255, 0.05) 70%,
-                    rgba(255, 255, 255, 0.01) 100%
-                );
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: #2c3e50;
-            font-size: 28px;
-            text-decoration: none;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.15),
-                inset 0 1px 1px rgba(255, 255, 255, 0.4),
-                inset 0 -1px 1px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            min-height: 100vh;
             position: relative;
-            overflow: hidden;
-            z-index: 1;
         }
 
-        /* Градиентное размытие по краям */
-        .social-link::before {
-            content: '';
-            position: absolute;
+        /* Animated Diagonal Lines */
+        .lines-container {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(
-                    circle at center,
-                    transparent 30%,
-                    rgba(255, 255, 255, 0.6) 100%
-                );
-            border-radius: 20px;
-            z-index: -1;
-            filter: blur(20px);
-            opacity: 0.6;
-            transition: all 0.4s ease;
-        }
-
-        /* Внутренняя граница для красивого края */
-        .social-link::after {
-            content: '';
-            position: absolute;
-            top: 1px;
-            left: 1px;
-            right: 1px;
-            bottom: 1px;
-            border-radius: 19px;
-            background: 
-                radial-gradient(
-                    circle at 50% 50%,
-                    rgba(255, 255, 255, 0.3) 0%,
-                    rgba(255, 255, 255, 0.1) 50%,
-                    transparent 100%
-                );
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: 
-                radial-gradient(
-                    circle at 50% 50%,
-                    rgba(255, 255, 255, 0.35) 0%,
-                    rgba(255, 255, 255, 0.2) 40%,
-                    rgba(255, 255, 255, 0.1) 70%,
-                    rgba(255, 255, 255, 0.02) 100%
-                );
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            transform: translateY(-10px) scale(1.12);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.25),
-                inset 0 2px 2px rgba(255, 255, 255, 0.6),
-                inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .social-link:hover::before {
-            opacity: 0.8;
-            filter: blur(25px);
-            background: 
-                radial-gradient(
-                    circle at center,
-                    transparent 20%,
-                    rgba(255, 255, 255, 0.8) 100%
-                );
-        }
-
-        .social-link:hover::after {
-            opacity: 1;
-        }
-
-        .social-link:active {
-            transform: translateY(-5px) scale(1.08);
-            transition: all 0.2s ease;
-        }
-
-        /* Эффект светового блика при наведении */
-        .social-link .light-effect {
-            position: absolute;
-            top: -50%;
-            left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(
-                circle at center,
-                rgba(255, 255, 255, 0.8) 0%,
-                transparent 70%
-            );
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.4s ease;
+            z-index: 0;
+            overflow: hidden;
             pointer-events: none;
         }
 
-        .social-link:hover .light-effect {
-            opacity: 0.3;
-            transform: scale(1);
-        }
-
-        .email-link {
-            display: inline-flex;
-            align-items: center;
-            margin-top: 25px;
-            color: #2c3e50;
-            text-decoration: none;
-            font-size: 18px;
-            padding: 16px 32px;
-            border-radius: 16px;
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    rgba(255, 255, 255, 0.25) 0%,
-                    rgba(255, 255, 255, 0.15) 40%,
-                    rgba(255, 255, 255, 0.05) 70%,
-                    rgba(255, 255, 255, 0.01) 100%
-                );
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.15),
-                inset 0 1px 1px rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .email-link::before {
-            content: '';
+        .diagonal-line {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    transparent 30%,
-                    rgba(255, 255, 255, 0.7) 100%
-                );
-            border-radius: 16px;
-            z-index: -1;
-            filter: blur(15px);
-            opacity: 0.5;
-            transition: all 0.3s ease;
-        }
-
-        .email-link:hover {
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    rgba(255, 255, 255, 0.35) 0%,
-                    rgba(255, 255, 255, 0.2) 40%,
-                    rgba(255, 255, 255, 0.1) 70%,
-                    rgba(255, 255, 255, 0.02) 100%
-                );
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            transform: translateY(-5px);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.2),
-                inset 0 2px 2px rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .email-link:hover::before {
-            opacity: 0.7;
-            filter: blur(20px);
-        }
-
-        .social-section {
-            text-align: center;
-            width: 100%;
-            margin-top: 40px;
-            position: relative;
-        }
-
-        .social-title {
-            font-size: 28px;
-            margin-bottom: 30px;
-            color: #2c3e50;
-            font-weight: 600;
-            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
-            padding: 20px 40px;
-            border-radius: 20px;
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    rgba(255, 255, 255, 0.25) 0%,
-                    rgba(255, 255, 255, 0.15) 40%,
-                    rgba(255, 255, 255, 0.05) 70%,
-                    rgba(255, 255, 255, 0.01) 100%
-                );
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.15),
-                inset 0 1px 1px rgba(255, 255, 255, 0.4);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .social-title::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    transparent 20%,
-                    rgba(255, 255, 255, 0.8) 100%
-                );
-            border-radius: 25px;
-            z-index: -1;
-            filter: blur(25px);
-            opacity: 0.6;
-            transition: all 0.3s ease;
-        }
-
-        .social-title:hover::before {
-            opacity: 0.8;
-            filter: blur(30px);
-        }
-
-        /* Модальное окно с обновленным эффектом */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            width: 1px;
             height: 100%;
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    rgba(255, 255, 255, 0.95) 0%,
-                    rgba(255, 255, 255, 0.85) 30%,
-                    rgba(255, 255, 255, 0.7) 60%,
-                    rgba(255, 255, 255, 0.5) 100%
-                );
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            padding: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.3),
-                inset 0 1px 2px rgba(255, 255, 255, 0.8);
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            border-radius: 30px;
-            color: #2c3e50;
-            position: relative;
-            overflow: hidden;
-            animation: modalAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .modal-content::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    transparent 20%,
-                    rgba(255, 255, 255, 0.9) 100%
-                );
-            border-radius: 40px;
-            z-index: -1;
-            filter: blur(40px);
-            opacity: 0.8;
-            transition: all 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes modalAppear {
-            from {
-                opacity: 0;
-                transform: scale(0.8) translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .modal-title {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-text {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            color: #34495e;
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
-        }
-
-        .modal-link {
-            display: inline-block;
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    rgba(255, 255, 255, 0.7) 0%,
-                    rgba(255, 255, 255, 0.5) 40%,
-                    rgba(255, 255, 255, 0.3) 70%,
-                    rgba(255, 255, 255, 0.1) 100%
-                );
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            color: #2c3e50;
-            padding: 14px 32px;
-            font-size: 16px;
-            text-decoration: none;
-            border-radius: 14px;
-            margin: 10px 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .modal-link::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: 
-                radial-gradient(
-                    circle at center,
-                    transparent 30%,
-                    rgba(255, 255, 255, 0.8) 100%
-                );
-            border-radius: 19px;
-            z-index: -1;
-            filter: blur(15px);
+            background: rgba(0, 0, 0, 0.15);
+            transform: rotate(-45deg);
             opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
-        .modal-link:hover {
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    rgba(255, 255, 255, 0.9) 0%,
-                    rgba(255, 255, 255, 0.7) 40%,
-                    rgba(255, 255, 255, 0.5) 70%,
-                    rgba(255, 255, 255, 0.2) 100%
-                );
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        .scrolling-down .diagonal-line {
+            animation: slideDown 12s linear infinite;
         }
 
-        .modal-link:hover::before {
-            opacity: 0.6;
+        .scrolling-up .diagonal-line {
+            animation: slideUp 12s linear infinite;
         }
 
-        .close-btn {
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    rgba(255, 255, 255, 0.7) 0%,
-                    rgba(255, 255, 255, 0.5) 40%,
-                    rgba(255, 255, 255, 0.3) 70%,
-                    rgba(255, 255, 255, 0.1) 100%
-                );
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            color: #2c3e50;
-            padding: 14px 32px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 14px;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .close-btn::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: 
-                radial-gradient(
-                    circle at center,
-                    transparent 30%,
-                    rgba(255, 255, 255, 0.8) 100%
-                );
-            border-radius: 19px;
-            z-index: -1;
-            filter: blur(15px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .close-btn:hover {
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    rgba(255, 255, 255, 0.9) 0%,
-                    rgba(255, 255, 255, 0.7) 40%,
-                    rgba(255, 255, 255, 0.5) 70%,
-                    rgba(255, 255, 255, 0.2) 100%
-                );
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .close-btn:hover::before {
-            opacity: 0.6;
-        }
-
-        /* Обновленный iOS стеклянный элемент с градиентным размытием */
-        .ios-glass {
-            padding: 2rem 2.5rem;
-            border-radius: 25px;
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    rgba(255, 255, 255, 0.3) 0%,
-                    rgba(255, 255, 255, 0.2) 30%,
-                    rgba(255, 255, 255, 0.1) 60%,
-                    rgba(255, 255, 255, 0.05) 100%
-                );
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.15),
-                inset 0 1px 2px rgba(255, 255, 255, 0.5);
-            margin: 30px 0;
-            text-align: center;
-            color: #2c3e50;
-            font-size: 18px;
-            max-width: 600px;
-            width: 90%;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .ios-glass::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    transparent 15%,
-                    rgba(255, 255, 255, 0.9) 100%
-                );
-            border-radius: 35px;
-            z-index: -1;
-            filter: blur(35px);
-            opacity: 0.7;
-            transition: all 0.4s ease;
-        }
-
-        .ios-glass:hover {
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    rgba(255, 255, 255, 0.4) 0%,
-                    rgba(255, 255, 255, 0.25) 30%,
-                    rgba(255, 255, 255, 0.15) 60%,
-                    rgba(255, 255, 255, 0.08) 100%
-                );
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            transform: translateY(-8px);
-            box-shadow: 
-                0 30px 50px rgba(0, 0, 0, 0.2),
-                inset 0 2px 3px rgba(255, 255, 255, 0.6);
-        }
-
-        .ios-glass:hover::before {
-            opacity: 0.9;
-            filter: blur(45px);
-            background: 
-                radial-gradient(
-                    ellipse at center,
-                    transparent 10%,
-                    rgba(255, 255, 255, 0.95) 100%
-                );
-        }
-
-        .ios-glass h3 {
-            font-size: 26px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.5);
-        }
-
-        .ios-glass p {
-            font-weight: 500;
-            line-height: 1.6;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Декоративные частицы для красоты */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
+        @keyframes slideDown {
             0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
+                opacity: 0.3;
+                transform: rotate(-45deg) translateY(-100%);
             }
             10% {
                 opacity: 1;
@@ -702,345 +61,755 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100vh) translateX(100px);
+                opacity: 0.3;
+                transform: rotate(-45deg) translateY(100%);
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0.3;
+                transform: rotate(-45deg) translateY(100%);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.3;
+                transform: rotate(-45deg) translateY(-100%);
+            }
+        }
+
+        .diagonal-line:nth-child(1) { left: 5%; animation-delay: 0s; }
+        .diagonal-line:nth-child(2) { left: 15%; animation-delay: -1.5s; }
+        .diagonal-line:nth-child(3) { left: 25%; animation-delay: -3s; }
+        .diagonal-line:nth-child(4) { left: 35%; animation-delay: -4.5s; }
+        .diagonal-line:nth-child(5) { left: 45%; animation-delay: -6s; }
+        .diagonal-line:nth-child(6) { left: 55%; animation-delay: -7.5s; }
+        .diagonal-line:nth-child(7) { left: 65%; animation-delay: -9s; }
+        .diagonal-line:nth-child(8) { left: 75%; animation-delay: -10.5s; }
+        .diagonal-line:nth-child(9) { left: 85%; animation-delay: -0.5s; }
+        .diagonal-line:nth-child(10) { left: 95%; animation-delay: -2s; }
+
+        /* Glass Card Effect */
+        .glass-card {
+            backdrop-filter: blur(25px) saturate(200%) brightness(1.1);
+            background: rgba(255, 255, 255, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03), inset 0 0 0 1px rgba(255,255,255,0.5);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Staggered Entrance */
+        .entrance-item {
+            opacity: 0;
+            animation: entranceSlide 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes entranceSlide {
+            from {
                 opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        @media (max-width: 768px) {
-            .social-link {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-                border-radius: 18px;
-            }
+        .entrance-item:nth-child(1) { animation-delay: 0.1s; }
+        .entrance-item:nth-child(2) { animation-delay: 0.2s; }
+        .entrance-item:nth-child(3) { animation-delay: 0.3s; }
+        .entrance-item:nth-child(4) { animation-delay: 0.4s; }
 
-            .social-link:hover {
-                transform: translateY(-8px) scale(1.1);
-            }
+        /* Status Indicator */
+        .status-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
 
-            .modal-content {
-                padding: 35px 25px;
-                border-radius: 25px;
-            }
+        .status-online {
+            background: #3ba55c;
+        }
 
-            .social-title {
-                font-size: 24px;
-                padding: 15px 30px;
-            }
-            
-            .ios-glass {
-                padding: 1.5rem 2rem;
-                font-size: 16px;
-                border-radius: 22px;
-            }
+        .status-idle {
+            background: #faa61a;
+        }
 
-            .ios-glass h3 {
-                font-size: 22px;
+        .status-dnd {
+            background: #ed4245;
+        }
+
+        .status-offline {
+            background: #747f8d;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: flex;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(25px);
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            padding: 4px;
+        }
+
+        .lang-btn {
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: rgba(0, 0, 0, 0.1);
+            color: #000;
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        .hero-card { grid-column: span 12; min-height: 280px; }
+        .featured-card { grid-column: span 12; min-height: 100px; }
+        .folder-main { grid-column: span 12; min-height: 140px; }
+
+        /* Social Links Page */
+        .social-link-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: #000;
+            transition: background-color 0.2s ease;
+        }
+
+        .social-link-item:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .social-link-name {
+            font-size: 16px;
+            font-weight: 600;
+            flex-grow: 1;
+        }
+
+        .social-link-arrow {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(25px);
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Spotify Album Rotation */
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
             }
         }
 
-        @media (max-width: 480px) {
-            .social-link {
-                width: 55px;
-                height: 55px;
-                font-size: 22px;
-                border-radius: 16px;
-            }
+        .spotify-album {
+            animation: rotate 8s linear infinite;
+        }
 
-            .social-link:hover {
-                transform: translateY(-6px) scale(1.08);
-            }
-            
-            .email-link {
-                font-size: 16px;
-                padding: 14px 28px;
-            }
+        /* Page Transitions */
+        .page {
+            display: none;
+            position: relative;
+            z-index: 10;
+        }
 
-            .social-title {
-                font-size: 20px;
-                padding: 12px 25px;
-            }
-            
-            .ios-glass {
-                padding: 1.2rem 1.5rem;
-                font-size: 15px;
-                border-radius: 20px;
-            }
+        .page.active {
+            display: block;
+        }
 
-            .ios-glass h3 {
-                font-size: 20px;
-            }
+        .page-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Views Counter */
+        .views-counter {
+            position: fixed;
+            top: 24px;
+            left: 40px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(25px);
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            padding: 8px 16px;
+        }
+
+        .views-count {
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* Bot Info Styles */
+        .bot-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
     </style>
 </head>
 <body>
-    <!-- Видео фон -->
-    <video class="video-background" autoplay muted loop playsinline>
-        <source src="video.mp4" type="video/mp4">
-        Ваш браузер не поддерживает видео тег.
-    </video>
-    
-    <div class="overlay"></div>
-    
-    <!-- Декоративные частицы -->
-    <div class="particles" id="particles"></div>
-
-    <div class="container">
-        <!-- Дополнительный iOS стеклянный элемент -->
-        <div class="ios-glass">
-            <h3>аахаахахах привет</h3>
-            <p>Это моя страница с ссылками на социальные сети. да тот самый neyt)</p>
-        </div>
-        
-        <!-- Социальные сети -->
-        <div class="social-section">
-            <h3 class="social-title">Мои соц сети</h3>
-            <div class="social-links">
-                <a href="#" class="social-link" data-modal="discord">
-                    <i class="fab fa-discord"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="reddit">
-                    <i class="fab fa-reddit"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="tiktok">
-                    <i class="fab fa-tiktok"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="telegram">
-                    <i class="fab fa-telegram"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="instagram">
-                    <i class="fab fa-instagram"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="spotify">
-                    <i class="fab fa-spotify"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="twitch">
-                    <i class="fab fa-twitch"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="youtube">
-                    <i class="fab fa-youtube"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="xbox">
-                    <i class="fab fa-xbox"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="twitter">
-                    <i class="fab fa-twitter"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="steam">
-                    <i class="fab fa-steam"></i>
-                    <div class="light-effect"></div>
-                </a>
-                <a href="#" class="social-link" data-modal="github">
-                    <i class="fab fa-github"></i>
-                    <div class="light-effect"></div>
-                </a>
-            </div>
-            <a href="mailto:Imamov0605@gmail.com" class="email-link">
-                <i class="fas fa-envelope" style="margin-right: 12px;"></i> Imamov0605@gmail.com
-            </a>
-        </div>
+    <!-- Views Counter -->
+    <div class="views-counter">
+        <span class="lang-en">Views:</span>
+        <span class="lang-ru" style="display: none;">Просмотры:</span>
+        <span class="views-count" id="viewsCount">1.8K</span>
     </div>
 
-    <!-- Модальное окно -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <h2 class="modal-title" id="modal-title">Discord</h2>
-            <p class="modal-text" id="modal-text">Да, тот самый тип с ником "Майонез"</p>
-            <a href="#" class="modal-link" id="modal-link" target="_blank">
-                Перейти в Discord
+    <!-- Animated Diagonal Lines -->
+    <div class="lines-container" id="linesContainer">
+        <div class="diagonal-line"></div>
+        <div class="diagonal-line"></div>
+        <div class="diagonal-line"></div>
+        <div class="diagonal-line"></div>
+        <div class="diagonal-line"></div>
+        <div class="diagonal-line"></div>
+        <div class="diagonal-line"></div>
+        <div class="diagonal-line"></div>
+        <div class="diagonal-line"></div>
+        <div class="diagonal-line"></div>
+    </div>
+
+    <!-- Main Page -->
+    <div class="page active" id="mainPage">
+        <!-- Navigation -->
+        <nav style="position: relative; z-index: 100; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 18px; font-weight: 900; color: #000000; margin-left: 100px;">neyt tm</div>
+            <div class="lang-toggle">
+                <button class="lang-btn active" onclick="switchLang('en')">EN</button>
+                <button class="lang-btn" onclick="switchLang('ru')">RU</button>
+            </div>
+        </nav>
+
+        <!-- Bento Grid -->
+        <div class="bento-grid">
+            
+            <!-- Hero Card -->
+            <div class="glass-card hero-card entrance-item">
+                <div class="card-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100%;">
+                    <h1 style="font-size: 72px; font-weight: 900; color: #000000; line-height: 0.9; margin-bottom: 16px; letter-spacing: -0.04em;">neyt tm</h1>
+                    <p style="font-size: 18px; font-weight: 600; color: #666; margin-bottom: 12px;" class="lang-en">Official website of neyt tm</p>
+                    <p style="font-size: 18px; font-weight: 600; color: #666; margin-bottom: 12px; display: none;" class="lang-ru">Официальный сайт neyt tm</p>
+                </div>
+            </div>
+
+            <!-- Featured Button -->
+            <div class="glass-card featured-card entrance-item">
+                <a href="https://gemmiai.github.io/bot/" target="_blank" style="text-decoration: none;">
+                    <div class="card-content" style="display: flex; align-items: center; justify-content: center; gap: 16px; min-height: 80px;">
+                        <div class="bot-info">
+                            <h3 style="font-size: 16px; font-weight: 700; color: #000000; margin: 0; margin-bottom: 2px;" class="lang-en">Gemmi AI Discord Bot</h3>
+                            <h3 style="font-size: 16px; font-weight: 700; color: #000000; margin: 0; margin-bottom: 2px; display: none;" class="lang-ru">Gemmi AI Discord Бот</h3>
+                            <p style="font-size: 12px; color: #666; margin: 0;" class="lang-en">The unstoppable engine powered by Google Gemini</p>
+                            <p style="font-size: 12px; color: #666; margin: 0; display: none;" class="lang-ru">Неудержимый двигатель на базе Google Gemini</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Social Media Folder -->
+            <div class="glass-card folder-main folder-card entrance-item" onclick="goToSocialPage()" style="cursor: pointer;">
+                <div class="card-content" style="display: flex; align-items: center; justify-content: center; gap: 20px; cursor: pointer;">
+                    <div>
+                        <h3 style="font-size: 32px; font-weight: 900; color: #000000; margin: 0; text-align: center;" class="lang-en">Social Media</h3>
+                        <h3 style="font-size: 32px; font-weight: 900; color: #000000; margin: 0; text-align: center; display: none;" class="lang-ru">Социальные Сети</h3>
+                        <p style="font-size: 14px; color: #666; margin: 0; margin-top: 8px; text-align: center;" class="lang-en">Tap to view all links</p>
+                        <p style="font-size: 14px; color: #666; margin: 0; margin-top: 8px; text-align: center; display: none;" class="lang-ru">Нажмите, чтобы увидеть все ссылки</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer style="position: relative; z-index: 10; padding: 40px; text-align: center; color: #999; font-size: 13px;">
+            <p class="lang-en">© 2026 neyt tm. All links lead to adventure.</p>
+            <p class="lang-ru" style="display: none;">© 2026 neyt tm. Все ссылки ведут к приключениям.</p>
+        </footer>
+    </div>
+
+    <!-- Social Media Page -->
+    <div class="page" id="socialPage">
+        <div class="page-content">
+            <!-- Back Button -->
+            <a href="#" class="back-button" onclick="goToMainPage()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span class="lang-en">Back</span>
+                <span class="lang-ru" style="display: none;">Назад</span>
             </a>
-            <br>
-            <button class="close-btn" id="close-modal">Закрыть</button>
+
+            <!-- Page Title -->
+            <h1 style="font-size: 48px; font-weight: 900; color: #000000; margin-bottom: 40px;" class="lang-en">Social Media Links</h1>
+            <h1 style="font-size: 48px; font-weight: 900; color: #000000; margin-bottom: 40px; display: none;" class="lang-ru">Социальные Сети</h1>
+
+            <!-- Bot Info -->
+            <div class="glass-card" style="margin-bottom: 40px; padding: 24px;">
+                <h2 style="font-size: 20px; font-weight: 700; color: #000000; margin-bottom: 12px;" class="lang-en">Gemmi - My Personal Bot</h2>
+                <h2 style="font-size: 20px; font-weight: 700; color: #000000; margin-bottom: 12px; display: none;" class="lang-ru">Gemmi - Мой Личный Бот</h2>
+                <p style="color: #666; margin-bottom: 16px; line-height: 1.5;" class="lang-en">
+                    Gemmi is my personal Discord bot powered by Google Gemini AI. You can learn more about it on the official website.
+                </p>
+                <p style="color: #666; margin-bottom: 16px; line-height: 1.5; display: none;" class="lang-ru">
+                    Gemmi - мой личный Discord бот на базе искусственного интеллекта Google Gemini. Вы можете узнать больше о нём на официальном сайте.
+                </p>
+                <a href="https://gemmiai.github.io/bot/" target="_blank" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                    <span class="lang-en">Visit Gemmi Website →</span>
+                    <span class="lang-ru" style="display: none;">Посетить сайт Gemmi →</span>
+                </a>
+            </div>
+
+            <!-- Activity History -->
+            <div class="glass-card" style="margin-bottom: 40px; padding: 24px;">
+                <h2 style="font-size: 24px; font-weight: 900; color: #000000; margin: 0; margin-bottom: 20px;" class="lang-en">Activity History</h2>
+                <h2 style="font-size: 24px; font-weight: 900; color: #000000; margin: 0; margin-bottom: 20px; display: none;" class="lang-ru">История Активности</h2>
+                <div id="statusContent" style="display: flex; align-items: center; gap: 16px;">
+                    <div class="spinner"></div>
+                    <span style="color: #666;" class="lang-en">Connecting to Discord...</span>
+                    <span style="color: #666; display: none;" class="lang-ru">Подключение к Discord...</span>
+                </div>
+            </div>
+
+            <!-- Social Links List -->
+            <div class="glass-card">
+                <!-- Telegram -->
+                <a href="https://t.me/neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">Telegram</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- Discord -->
+                <a href="https://discord.com/users/neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">Discord</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- Steam -->
+                <a href="https://steamcommunity.com/id/neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">Steam</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">Instagram</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- Threads -->
+                <a href="https://threads.net/@neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">Threads</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- Xbox -->
+                <a href="https://account.xbox.com/profile?gamertag=neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">Xbox</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- PlayStation -->
+                <a href="https://psnprofiles.com/neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">PlayStation</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- Spotify -->
+                <a href="https://open.spotify.com/user/neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">Spotify</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- Reddit -->
+                <a href="https://reddit.com/u/neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">Reddit</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/neyttm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">GitHub</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- TikTok -->
+                <a href="https://tiktok.com/@neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">TikTok</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- Twitch -->
+                <a href="https://twitch.tv/neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">Twitch</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://youtube.com/@neyt_tm" target="_blank" class="social-link-item">
+                    <span class="social-link-name">YouTube</span>
+                    <span class="social-link-arrow">→</span>
+                </a>
+            </div>
+
+            <!-- Footer -->
+            <footer style="text-align: center; color: #999; font-size: 13px; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(0, 0, 0, 0.1);">
+                <p class="lang-en">© 2026 neyt tm. All links lead to adventure.</p>
+                <p class="lang-ru" style="display: none;">© 2026 neyt tm. Все ссылки ведут к приключениям.</p>
+            </footer>
         </div>
     </div>
 
     <script>
-        // Данные для модальных окон с ссылками
-        const modalData = {
-            discord: {
-                title: "Discord",
-                text: "Да, тот самый тип с ником 'Майонез'",
-                link: "https://discord.com/users/neyt_tm",
-                linkText: "Перейти в Discord"
-            },
-            reddit: {
-                title: "Reddit",
-                text: "Читайте мои посты, меня там только забанили(",
-                link: "https://www.reddit.com/user/u/neyt_tm",
-                linkText: "Перейти в Reddit"
-            },
-            tiktok: {
-                title: "TikTok",
-                text: "Сука тебе сюда (в TikTok)",
-                link: "https://www.tiktok.com/@neyt_tm",
-                linkText: "Перейти в TikTok"
-            },
-            telegram: {
-                title: "Telegram",
-                text: "ТГ писать строго по делам!",
-                link: "https://t.me/neyt_tm",
-                linkText: "Перейти в Telegram"
-            },
-            instagram: {
-                title: "Instagram",
-                text: "Мой Instagram",
-                link: "https://www.instagram.com/neyt_tm",
-                linkText: "Перейти в Instagram"
-            },
-            spotify: {
-                title: "Spotify",
-                text: "Слушайте мои плейлисты на Spotify",
-                link: "https://open.spotify.com/user/neyt_tm",
-                linkText: "Перейти в Spotify"
-            },
-            twitch: {
-                title: "Twitch",
-                text: "Смотрите мои стримы на (я туда раз в жизни заходил) Twitch",
-                link: "https://www.twitch.tv/neyt_tm",
-                linkText: "Перейти в Twitch"
-            },
-            youtube: {
-                title: "YouTube",
-                text: "Подписывайтесь на мой YouTube",
-                link: "https://www.youtube.com/@neyt_tm",
-                linkText: "Перейти в YouTube"
-            },
-            xbox: {
-                title: "Xbox",
-                text: "Играйте со мной (В основном это майнкрафт ПЕ)",
-                link: "https://xbox.com",
-                linkText: "Перейти в Xbox"
-            },
-            twitter: {
-                title: "Twitter",
-                text: "Читайте мои твиты (их там нету)",
-                link: "https://twitter.com/neyt_tm",
-                linkText: "Перейти в Twitter"
-            },
-            steam: {
-                title: "Steam",
-                text: "Я туда не захожу, но добавьтесь в друзья",
-                link: "https://steamcommunity.com/profiles/76561199850093719/",
-                linkText: "Перейти в Steam"
-            },
-            github: {
-                title: "GitHub",
-                text: "Смотрите мои проекты на GitHub, жаль их нету там",
-                link: "https://github.com/neyttm",
-                linkText: "Перейти в GitHub"
-            }
-        };
-
-        // Элементы
-        const modal = document.getElementById('modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalText = document.getElementById('modal-text');
-        const modalLink = document.getElementById('modal-link');
-        const closeBtn = document.getElementById('close-modal');
-        const particlesContainer = document.getElementById('particles');
-
-        // Создаем декоративные частицы
-        function createParticles() {
-            const particleCount = 30;
+        // Language Switch
+        function switchLang(lang) {
+            const buttons = document.querySelectorAll('.lang-btn');
+            const enElements = document.querySelectorAll('.lang-en');
+            const ruElements = document.querySelectorAll('.lang-ru');
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Случайная позиция
-                particle.style.left = `${Math.random() * 100}vw`;
-                particle.style.top = `${Math.random() * 100}vh`;
-                
-                // Случайный размер
-                const size = 1 + Math.random() * 4;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Случайная прозрачность
-                particle.style.opacity = 0.3 + Math.random() * 0.7;
-                
-                // Случайная задержка анимации
-                particle.style.animationDelay = `${Math.random() * 20}s`;
-                
-                // Случайная длительность анимации
-                particle.style.animationDuration = `${15 + Math.random() * 15}s`;
-                
-                particlesContainer.appendChild(particle);
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (lang === 'en') {
+                buttons[0].classList.add('active');
+                enElements.forEach(el => el.style.display = '');
+                ruElements.forEach(el => el.style.display = 'none');
+            } else {
+                buttons[1].classList.add('active');
+                enElements.forEach(el => el.style.display = 'none');
+                ruElements.forEach(el => el.style.display = '');
             }
         }
 
-        // Открытие модального окна
-        document.querySelectorAll('.social-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const platform = link.getAttribute('data-modal');
-                
-                if (modalData[platform]) {
-                    // Устанавливаем данные
-                    modalTitle.textContent = modalData[platform].title;
-                    modalText.textContent = modalData[platform].text;
-                    modalLink.href = modalData[platform].link;
-                    modalLink.textContent = modalData[platform].linkText;
-                    
-                    // Активируем модальное окно
-                    modal.classList.add('active');
-                    
-                    // Добавляем небольшую вибрацию для кнопки
-                    link.style.animation = 'vibrate 0.3s ease';
-                    setTimeout(() => {
-                        link.style.animation = '';
-                    }, 300);
+        // Page Navigation
+        function goToSocialPage() {
+            document.getElementById('mainPage').classList.remove('active');
+            document.getElementById('socialPage').classList.add('active');
+            // Refresh Discord status when going to social page
+            fetchDiscordStatus();
+        }
+
+        function goToMainPage() {
+            document.getElementById('socialPage').classList.remove('active');
+            document.getElementById('mainPage').classList.add('active');
+        }
+
+        // Scroll detection for line animation
+        let lastScrollY = window.scrollY;
+        let isScrollingDown = true;
+        let scrollTimeout;
+        const linesContainer = document.getElementById('linesContainer');
+
+        function handleScroll() {
+            const currentScrollY = window.scrollY;
+            
+            // Clear any existing timeout
+            clearTimeout(scrollTimeout);
+            
+            // Set a timeout to detect when scrolling stops
+            scrollTimeout = setTimeout(() => {
+                // When scrolling stops, pause the animation
+                linesContainer.classList.remove('scrolling-down', 'scrolling-up');
+            }, 150);
+            
+            if (currentScrollY > lastScrollY + 5) {
+                // Scrolling down with threshold
+                if (!isScrollingDown) {
+                    linesContainer.classList.remove('scrolling-up');
+                    linesContainer.classList.add('scrolling-down');
+                    isScrollingDown = true;
                 }
-            });
-        });
-
-        // Закрытие модального окна
-        function closeModal() {
-            modal.classList.remove('active');
+            } else if (currentScrollY < lastScrollY - 5) {
+                // Scrolling up with threshold
+                if (isScrollingDown) {
+                    linesContainer.classList.remove('scrolling-down');
+                    linesContainer.classList.add('scrolling-up');
+                    isScrollingDown = false;
+                }
+            }
+            
+            lastScrollY = currentScrollY;
         }
 
-        closeBtn.addEventListener('click', closeModal);
+        // Initialize scroll handler
+        window.addEventListener('scroll', handleScroll);
+        
+        // Start animation initially
+        linesContainer.classList.add('scrolling-down');
 
-        // Закрытие по клику вне окна
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
+        // Views Counter Logic
+        function updateViewsCounter() {
+            const viewsCount = document.getElementById('viewsCount');
+            let views = localStorage.getItem('neyt-tm-views');
+            
+            if (!views) {
+                // Start with 1.8K (1800) views
+                views = 1800;
+            } else {
+                views = parseInt(views);
+            }
+            
+            // Increase view count by 1
+            views++;
+            
+            // Save to localStorage
+            localStorage.setItem('neyt-tm-views', views);
+            
+            // Format number
+            let formattedViews;
+            if (views >= 1000000) {
+                formattedViews = (views / 1000000).toFixed(1) + 'M';
+            } else if (views >= 1000) {
+                formattedViews = (views / 1000).toFixed(1) + 'K';
+            } else {
+                formattedViews = views.toString();
+            }
+            
+            // Update counter
+            viewsCount.textContent = formattedViews;
+        }
+
+        // Update views when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if this is the first visit today
+            const lastVisit = localStorage.getItem('neyt-tm-last-visit');
+            const today = new Date().toDateString();
+            
+            if (!lastVisit || lastVisit !== today) {
+                updateViewsCounter();
+                localStorage.setItem('neyt-tm-last-visit', today);
             }
         });
 
-        // Закрытие по ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
+        // Lanyard API Integration
+        const DISCORD_ID = '1326532850119344169';
+        const LANYARD_API = `https://api.lanyard.rest/v1/users/${DISCORD_ID}`;
 
-        // Создаем частицы при загрузке
-        document.addEventListener('DOMContentLoaded', createParticles);
-
-        // Добавляем CSS для вибрации
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes vibrate {
-                0% { transform: translateY(-10px) scale(1.12) rotate(0deg); }
-                25% { transform: translateY(-10px) scale(1.12) rotate(1deg); }
-                50% { transform: translateY(-10px) scale(1.12) rotate(-1deg); }
-                75% { transform: translateY(-10px) scale(1.12) rotate(1deg); }
-                100% { transform: translateY(-10px) scale(1.12) rotate(0deg); }
+        async function fetchDiscordStatus() {
+            if (!DISCORD_ID) {
+                updateStatusOffline('No Discord ID configured');
+                return;
             }
-        `;
-        document.head.appendChild(style);
+
+            try {
+                const response = await fetch(LANYARD_API);
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    updateStatusUI(data.data);
+                } else {
+                    updateStatusOffline('Unable to fetch status');
+                }
+            } catch (error) {
+                console.error('Lanyard API error:', error);
+                updateStatusOffline('Connection error');
+            }
+        }
+
+        function updateStatusUI(lanyardData) {
+            const statusContent = document.getElementById('statusContent');
+            const { discord_status, activities, spotify } = lanyardData;
+            
+            let statusClass = 'status-offline';
+            let statusText = 'Offline';
+            let statusTextRu = 'Не в сети';
+            
+            switch(discord_status) {
+                case 'online':
+                    statusClass = 'status-online';
+                    statusText = 'Online';
+                    statusTextRu = 'В сети';
+                    break;
+                case 'idle':
+                    statusClass = 'status-idle';
+                    statusText = 'Idle';
+                    statusTextRu = 'Неактивен';
+                    break;
+                case 'dnd':
+                    statusClass = 'status-dnd';
+                    statusText = 'Do Not Disturb';
+                    statusTextRu = 'Не беспокоить';
+                    break;
+            }
+
+            let activityHTML = '';
+
+            // Check Spotify
+            if (spotify) {
+                activityHTML = `
+                    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                        <div class="status-dot ${statusClass}"></div>
+                        <img src="${spotify.album_art_url}" 
+                             alt="Album Art" 
+                             class="spotify-album"
+                             style="width: 80px; height: 80px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                        <div>
+                            <div style="font-size: 14px; color: #666; margin-bottom: 4px;">
+                                <span class="lang-en">Listening to Spotify</span>
+                                <span class="lang-ru" style="display: none;">Слушает Spotify</span>
+                            </div>
+                            <div style="font-size: 18px; font-weight: 700; color: #000; margin-bottom: 2px;">${spotify.song}</div>
+                            <div style="font-size: 14px; color: #666;">${spotify.artist}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            // Check for game activity
+            else if (activities && activities.length > 0) {
+                const gameActivity = activities.find(act => act.type === 0);
+                if (gameActivity) {
+                    activityHTML = `
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div class="status-dot ${statusClass}"></div>
+                            ${gameActivity.assets && gameActivity.assets.large_image ? 
+                                `<img src="https://cdn.discordapp.com/app-assets/${gameActivity.application_id}/${gameActivity.assets.large_image}.png" 
+                                     alt="Game Icon" 
+                                     style="width: 80px; height: 80px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">` 
+                                : ''}
+                            <div>
+                                <div style="font-size: 14px; color: #666; margin-bottom: 4px;">
+                                    <span class="lang-en">Playing</span>
+                                    <span class="lang-ru" style="display: none;">Играет</span>
+                                </div>
+                                <div style="font-size: 18px; font-weight: 700; color: #000; margin-bottom: 2px;">${gameActivity.name}</div>
+                                ${gameActivity.details ? `<div style="font-size: 14px; color: #666;">${gameActivity.details}</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    activityHTML = `
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div class="status-dot ${statusClass}"></div>
+                            <div>
+                                <div style="font-size: 16px; font-weight: 600; color: #000;">
+                                    <span class="lang-en">${statusText}</span>
+                                    <span class="lang-ru" style="display: none;">${statusTextRu}</span>
+                                </div>
+                                <div style="font-size: 13px; color: #666; margin-top: 4px;">
+                                    <span class="lang-en">No current activity</span>
+                                    <span class="lang-ru" style="display: none;">Нет текущей активности</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else {
+                activityHTML = `
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div class="status-dot ${statusClass}"></div>
+                        <div>
+                            <div style="font-size: 16px; font-weight: 600; color: #000;">
+                                <span class="lang-en">${statusText}</span>
+                                <span class="lang-ru" style="display: none;">${statusTextRu}</span>
+                            </div>
+                            <div style="font-size: 13px; color: #666; margin-top: 4px;">
+                                <span class="lang-en">No current activity</span>
+                                <span class="lang-ru" style="display: none;">Нет текущей активности</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            statusContent.innerHTML = activityHTML;
+        }
+
+        function updateStatusOffline(message) {
+            const statusContent = document.getElementById('statusContent');
+            statusContent.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div class="status-dot status-offline"></div>
+                    <div>
+                        <div style="font-size: 16px; font-weight: 600; color: #000;">
+                            <span class="lang-en">Offline</span>
+                            <span class="lang-ru" style="display: none;">Не в сети</span>
+                        </div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">${message}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize
+        fetchDiscordStatus();
+        
+        // Refresh status every 30 seconds
+        setInterval(fetchDiscordStatus, 2500);
     </script>
 </body>
 </html>
